@@ -198,7 +198,7 @@ namespace RoboEnvCompiler {
 		}
 #pragma endregion
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
-				 this->label1->Text = "DA TI SE POSERAM VO C++";
+				 this->label1->Text = "test C++";
 
 			 }
 	private: System::Void exitAltF4ToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
