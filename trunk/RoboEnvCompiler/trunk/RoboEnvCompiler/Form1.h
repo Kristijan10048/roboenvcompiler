@@ -84,7 +84,7 @@ namespace RoboEnvCompiler {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(399, 264);
+			this->ClientSize = System::Drawing::Size(665, 498);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->label1);
 			this->Name = L"Form1";
