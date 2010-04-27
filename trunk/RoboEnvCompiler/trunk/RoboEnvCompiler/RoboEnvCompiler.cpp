@@ -1,7 +1,7 @@
 // RoboEnvCompiler.cpp : main project file.
 
 #include "stdafx.h"
-#include "Form1.h"
+#include "RoboEnvCompilerMain.h"
 
 using namespace RoboEnvCompiler;
 
