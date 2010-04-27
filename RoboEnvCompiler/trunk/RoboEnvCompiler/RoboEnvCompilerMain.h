@@ -88,7 +88,7 @@ namespace RoboEnvCompiler {
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->label1);
 			this->Name = L"Form1";
-			this->Text = L"Form1";
+			this->Text = L"RoboEnvCompiler";
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -96,6 +96,7 @@ namespace RoboEnvCompiler {
 #pragma endregion
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
 				 this->label1->Text = "DA TI SE POSERAM VO C++";
+
 			 }
 	};
 }
