@@ -41,6 +41,9 @@ namespace RoboEnvCompiler {
 				delete components;
 			}
 		}
+	private: System::Windows::Forms::Label^  label1;
+	protected: 
+	private: System::Windows::Forms::Button^  button1;
 
 	private:
 		/// <summary>
@@ -55,13 +58,45 @@ namespace RoboEnvCompiler {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			this->components = gcnew System::ComponentModel::Container();
-			this->Size = System::Drawing::Size(300,300);
-			this->Text = L"Form1";
-			this->Padding = System::Windows::Forms::Padding(0);
+			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->SuspendLayout();
+			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->label1->Location = System::Drawing::Point(158, 55);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(0, 13);
+			this->label1->TabIndex = 0;
+			// 
+			// button1
+			// 
+			this->button1->Location = System::Drawing::Point(113, 82);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(134, 23);
+			this->button1->TabIndex = 1;
+			this->button1->Text = L"KLIKNI ME!!!";
+			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &Form1::button1_Click);
+			// 
+			// Form1
+			// 
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->ClientSize = System::Drawing::Size(399, 264);
+			this->Controls->Add(this->button1);
+			this->Controls->Add(this->label1);
+			this->Name = L"Form1";
+			this->Text = L"Form1";
+			this->ResumeLayout(false);
+			this->PerformLayout();
+
 		}
 #pragma endregion
+	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
+				 this->label1->Text = "DA TI SE POSERAM VO C++";
+			 }
 	};
 }
 
