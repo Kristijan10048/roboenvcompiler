@@ -73,6 +73,7 @@ namespace RoboEnvCompiler {
 			// 
 			// button1
 			// 
+			this->button1->DialogResult = System::Windows::Forms::DialogResult::Cancel;
 			this->button1->Location = System::Drawing::Point(114, 156);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(75, 23);
@@ -81,14 +82,19 @@ namespace RoboEnvCompiler {
 			this->button1->UseVisualStyleBackColor = true;
 			this->button1->Click += gcnew System::EventHandler(this, &aboutForm::button1_Click);
 			// 
-			// about
+			// aboutForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->CancelButton = this->button1;
 			this->ClientSize = System::Drawing::Size(292, 268);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->label1);
-			this->Name = L"about";
+			this->MaximizeBox = false;
+			this->MaximumSize = System::Drawing::Size(300, 300);
+			this->MinimizeBox = false;
+			this->MinimumSize = System::Drawing::Size(300, 300);
+			this->Name = L"aboutForm";
 			this->Text = L"about";
 			this->ResumeLayout(false);
 			this->PerformLayout();
