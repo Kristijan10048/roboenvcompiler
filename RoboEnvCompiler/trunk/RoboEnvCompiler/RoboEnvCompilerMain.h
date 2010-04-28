@@ -1,5 +1,6 @@
 #pragma once
 
+#include "aboutForm.h"
 
 namespace RoboEnvCompiler {
 
@@ -9,7 +10,7 @@ namespace RoboEnvCompiler {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
-	//using namespace RoboEnvCompiler::aboutForm;
+	using namespace RoboEnvCompiler;
 
 	/// <summary>
 	/// Summary for Form1
@@ -205,6 +206,14 @@ namespace RoboEnvCompiler {
 				 this->Close();
 			 }
 private: System::Void aboutToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+
+			 //kreiranje i alokacna na memoriski prostor za nova forma vo C++
+			 aboutForm ^about;
+			 about= gcnew aboutForm();
+			 about->Show();
+			 //about.Show()
+			 //about.
+			 //about = new aboutForm;
 		 }
 		
 		 
