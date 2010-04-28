@@ -90,6 +90,7 @@ namespace RoboEnvCompiler {
 			this->ClientSize = System::Drawing::Size(292, 268);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->label1);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
 			this->MaximizeBox = false;
 			this->MaximumSize = System::Drawing::Size(300, 300);
 			this->MinimizeBox = false;
