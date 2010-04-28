@@ -33,6 +33,8 @@ namespace RoboEnvCompiler {
 			//
 			this->lastw=this->Width;
 			this->lasth=this->Height;
+		    this->razw=this->lastw-this->tbInput->Width;
+			this->razh=this->lasth-this->tbInput->Height;
 		}
 
 	protected:
@@ -46,9 +48,9 @@ namespace RoboEnvCompiler {
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::Label^  label1;
+
 	protected: 
-	private: System::Windows::Forms::Button^  button1;
+
 	private: System::Windows::Forms::StatusStrip^  statusStrip1;
 	private: System::Windows::Forms::MenuStrip^  menuStrip1;
 	private: System::Windows::Forms::ToolStripMenuItem^  fileToolStripMenuItem;
@@ -61,8 +63,10 @@ namespace RoboEnvCompiler {
 	private: System::Windows::Forms::ToolStripMenuItem^  compileToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  stepOverToolStripMenuItem;
 
-	private : int lastw;
-	private : int lasth;
+	private: int lastw;
+	private: int lasth;
+	private: int razw;
+	private: int razh;
 	private: 
 
 	private:
@@ -78,8 +82,6 @@ namespace RoboEnvCompiler {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->statusStrip1 = (gcnew System::Windows::Forms::StatusStrip());
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
 			this->fileToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -93,29 +95,11 @@ namespace RoboEnvCompiler {
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
-			// label1
-			// 
-			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(152, 455);
-			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(0, 13);
-			this->label1->TabIndex = 0;
-			// 
-			// button1
-			// 
-			this->button1->Location = System::Drawing::Point(12, 450);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(134, 23);
-			this->button1->TabIndex = 1;
-			this->button1->Text = L"KLIKNI ME!!!";
-			this->button1->UseVisualStyleBackColor = true;
-			this->button1->Click += gcnew System::EventHandler(this, &Form1::button1_Click);
-			// 
 			// statusStrip1
 			// 
-			this->statusStrip1->Location = System::Drawing::Point(0, 476);
+			this->statusStrip1->Location = System::Drawing::Point(0, 448);
 			this->statusStrip1->Name = L"statusStrip1";
-			this->statusStrip1->Size = System::Drawing::Size(1017, 22);
+			this->statusStrip1->Size = System::Drawing::Size(694, 22);
 			this->statusStrip1->TabIndex = 2;
 			this->statusStrip1->Text = L"statusStrip1";
 			// 
@@ -125,7 +109,7 @@ namespace RoboEnvCompiler {
 				this->toolStripMenuItem1, this->helpToolStripMenuItem});
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
-			this->menuStrip1->Size = System::Drawing::Size(1017, 24);
+			this->menuStrip1->Size = System::Drawing::Size(694, 24);
 			this->menuStrip1->TabIndex = 3;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
@@ -183,27 +167,23 @@ namespace RoboEnvCompiler {
 			this->tbInput->Multiline = true;
 			this->tbInput->Name = L"tbInput";
 			this->tbInput->ScrollBars = System::Windows::Forms::ScrollBars::Both;
-			this->tbInput->Size = System::Drawing::Size(993, 417);
+			this->tbInput->Size = System::Drawing::Size(670, 416);
 			this->tbInput->TabIndex = 4;
 			// 
 			// Form1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1017, 498);
+			this->ClientSize = System::Drawing::Size(694, 470);
 			this->Controls->Add(this->tbInput);
 			this->Controls->Add(this->statusStrip1);
 			this->Controls->Add(this->menuStrip1);
-			this->Controls->Add(this->button1);
-			this->Controls->Add(this->label1);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->MainMenuStrip = this->menuStrip1;
 			this->Name = L"Form1";
 			this->Text = L"RoboEnvCompiler";
-			this->ResizeBegin += gcnew System::EventHandler(this, &Form1::Form1_ResizeBegin);
+			this->Load += gcnew System::EventHandler(this, &Form1::Form1_Load);
 			this->SizeChanged += gcnew System::EventHandler(this, &Form1::Form1_SizeChanged);
-			this->Resize += gcnew System::EventHandler(this, &Form1::Form1_Resize);
-			this->ResizeEnd += gcnew System::EventHandler(this, &Form1::Form1_ResizeEnd);
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
 			this->ResumeLayout(false);
@@ -211,13 +191,12 @@ namespace RoboEnvCompiler {
 
 		}
 #pragma endregion
-	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
-				 this->label1->Text = "test C++";
-
-			 }
-	private: System::Void exitAltF4ToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+	
+private: System::Void exitAltF4ToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 				 this->Close();
-			 }
+		}
+
+
 private: System::Void aboutToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 
 			 //kreiranje i alokacna na memoriski prostor za nova forma vo C++
@@ -227,44 +206,28 @@ private: System::Void aboutToolStripMenuItem_Click(System::Object^  sender, Syst
 		 }
 		
 
-	 
 
-private: System::Void Form1_Resize(System::Object^  sender, System::EventArgs^  e) {
-			
-			 
-			 		 }
-private: System::Void Form1_ResizeBegin(System::Object^  sender, System::EventArgs^  e) {
-			 
-		 }
-private: System::Void Form1_ResizeEnd(System::Object^  sender, System::EventArgs^  e) {
-			
 
-		 }
 private: System::Void Form1_SizeChanged(System::Object^  sender, System::EventArgs^  e) {
 			 Screen ^sp = Screen::PrimaryScreen;
+			 int w = sp->WorkingArea.Width;
+			 int h = sp->WorkingArea.Height;
+
 			 if(this->WindowState == FormWindowState::Maximized)
-			 {
-				int w = sp->WorkingArea.Width;
-				int h = sp->WorkingArea.Height;
-				this->tbInput->Width=tbInput->Width+20;
-				//this->Size.Width
-				int wl=this->lastw;
-				int rez=w/wl;
-				this->label1->Text =this->lastw+" : "+this->Width+"="+w+"x"+h;
-				
-				
-				
+			 {			
+				this->tbInput->Width=w-this->razw;		
+				this->tbInput->Height=h-this->razh;
 				
 			 }
 			 if(this->WindowState == FormWindowState::Normal)
 			 {
-				this->tbInput->Width=tbInput->Width-20; 
-				int w=this->Width;
-				int wl=this->lastw;
-				int rez=w-wl+100;			
-
-				this->label1->Text =this->lastw+" : "+this->Width+"="+rez;
+				 this->tbInput->Width=this->lastw-this->razw;
+				 this->tbInput->Height=this->lasth-this->razh;
 			 }
+		 }
+private: System::Void Form1_Load(System::Object^  sender, System::EventArgs^  e) {
+		 }
+private: System::Void Form1_ResizeBegin(System::Object^  sender, System::EventArgs^  e) {
 		 }
 };
 }
