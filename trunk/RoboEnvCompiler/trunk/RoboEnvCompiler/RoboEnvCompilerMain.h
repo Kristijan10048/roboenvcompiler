@@ -12,6 +12,7 @@ namespace RoboEnvCompiler {
 	using namespace System::Drawing;
 	using namespace RoboEnvCompiler;
 
+
 	/// <summary>
 	/// Summary for Form1
 	///
@@ -30,6 +31,8 @@ namespace RoboEnvCompiler {
 			//
 			//TODO: Add the constructor code here
 			//
+			this->lastw=this->Width;
+			this->lasth=this->Height;
 		}
 
 	protected:
@@ -52,10 +55,14 @@ namespace RoboEnvCompiler {
 	private: System::Windows::Forms::ToolStripMenuItem^  exitAltF4ToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  helpToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  aboutToolStripMenuItem;
-	private: System::Windows::Forms::TextBox^  textBox1;
+	private: System::Windows::Forms::TextBox^  tbInput;
+
 	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItem1;
 	private: System::Windows::Forms::ToolStripMenuItem^  compileToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  stepOverToolStripMenuItem;
+
+	private : int lastw;
+	private : int lasth;
 	private: 
 
 	private:
@@ -77,26 +84,26 @@ namespace RoboEnvCompiler {
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
 			this->fileToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->exitAltF4ToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->helpToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->aboutToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->toolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->compileToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->stepOverToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->helpToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->aboutToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->tbInput = (gcnew System::Windows::Forms::TextBox());
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(869, 43);
+			this->label1->Location = System::Drawing::Point(152, 455);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(0, 13);
 			this->label1->TabIndex = 0;
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(666, 33);
+			this->button1->Location = System::Drawing::Point(12, 450);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(134, 23);
 			this->button1->TabIndex = 1;
@@ -136,28 +143,6 @@ namespace RoboEnvCompiler {
 			this->exitAltF4ToolStripMenuItem->Text = L"Exit Alt+F4";
 			this->exitAltF4ToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::exitAltF4ToolStripMenuItem_Click);
 			// 
-			// helpToolStripMenuItem
-			// 
-			this->helpToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) {this->aboutToolStripMenuItem});
-			this->helpToolStripMenuItem->Name = L"helpToolStripMenuItem";
-			this->helpToolStripMenuItem->Size = System::Drawing::Size(40, 20);
-			this->helpToolStripMenuItem->Text = L"Help";
-			// 
-			// aboutToolStripMenuItem
-			// 
-			this->aboutToolStripMenuItem->Name = L"aboutToolStripMenuItem";
-			this->aboutToolStripMenuItem->Size = System::Drawing::Size(152, 22);
-			this->aboutToolStripMenuItem->Text = L"About";
-			this->aboutToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::aboutToolStripMenuItem_Click);
-			// 
-			// textBox1
-			// 
-			this->textBox1->Location = System::Drawing::Point(12, 40);
-			this->textBox1->Multiline = true;
-			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(612, 421);
-			this->textBox1->TabIndex = 4;
-			// 
 			// toolStripMenuItem1
 			// 
 			this->toolStripMenuItem1->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {this->compileToolStripMenuItem, 
@@ -178,19 +163,47 @@ namespace RoboEnvCompiler {
 			this->stepOverToolStripMenuItem->Size = System::Drawing::Size(155, 22);
 			this->stepOverToolStripMenuItem->Text = L"Step Over F10";
 			// 
+			// helpToolStripMenuItem
+			// 
+			this->helpToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) {this->aboutToolStripMenuItem});
+			this->helpToolStripMenuItem->Name = L"helpToolStripMenuItem";
+			this->helpToolStripMenuItem->Size = System::Drawing::Size(40, 20);
+			this->helpToolStripMenuItem->Text = L"Help";
+			// 
+			// aboutToolStripMenuItem
+			// 
+			this->aboutToolStripMenuItem->Name = L"aboutToolStripMenuItem";
+			this->aboutToolStripMenuItem->Size = System::Drawing::Size(114, 22);
+			this->aboutToolStripMenuItem->Text = L"About";
+			this->aboutToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::aboutToolStripMenuItem_Click);
+			// 
+			// tbInput
+			// 
+			this->tbInput->Location = System::Drawing::Point(12, 27);
+			this->tbInput->Multiline = true;
+			this->tbInput->Name = L"tbInput";
+			this->tbInput->ScrollBars = System::Windows::Forms::ScrollBars::Both;
+			this->tbInput->Size = System::Drawing::Size(993, 417);
+			this->tbInput->TabIndex = 4;
+			// 
 			// Form1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1017, 498);
-			this->Controls->Add(this->textBox1);
+			this->Controls->Add(this->tbInput);
 			this->Controls->Add(this->statusStrip1);
 			this->Controls->Add(this->menuStrip1);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->label1);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->MainMenuStrip = this->menuStrip1;
 			this->Name = L"Form1";
 			this->Text = L"RoboEnvCompiler";
+			this->ResizeBegin += gcnew System::EventHandler(this, &Form1::Form1_ResizeBegin);
+			this->SizeChanged += gcnew System::EventHandler(this, &Form1::Form1_SizeChanged);
+			this->Resize += gcnew System::EventHandler(this, &Form1::Form1_Resize);
+			this->ResizeEnd += gcnew System::EventHandler(this, &Form1::Form1_ResizeEnd);
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
 			this->ResumeLayout(false);
@@ -211,13 +224,48 @@ private: System::Void aboutToolStripMenuItem_Click(System::Object^  sender, Syst
 			 aboutForm ^about;
 			 about= gcnew aboutForm();
 			 about->Show();
-			 //about.Show()
-			 //about.
-			 //about = new aboutForm;
 		 }
 		
-		 
 
+	 
+
+private: System::Void Form1_Resize(System::Object^  sender, System::EventArgs^  e) {
+			
+			 
+			 		 }
+private: System::Void Form1_ResizeBegin(System::Object^  sender, System::EventArgs^  e) {
+			 
+		 }
+private: System::Void Form1_ResizeEnd(System::Object^  sender, System::EventArgs^  e) {
+			
+
+		 }
+private: System::Void Form1_SizeChanged(System::Object^  sender, System::EventArgs^  e) {
+			 Screen ^sp = Screen::PrimaryScreen;
+			 if(this->WindowState == FormWindowState::Maximized)
+			 {
+				int w = sp->WorkingArea.Width;
+				int h = sp->WorkingArea.Height;
+				this->tbInput->Width=tbInput->Width+20;
+				//this->Size.Width
+				int wl=this->lastw;
+				int rez=w/wl;
+				this->label1->Text =this->lastw+" : "+this->Width+"="+w+"x"+h;
+				
+				
+				
+				
+			 }
+			 if(this->WindowState == FormWindowState::Normal)
+			 {
+				this->tbInput->Width=tbInput->Width-20; 
+				int w=this->Width;
+				int wl=this->lastw;
+				int rez=w-wl+100;			
+
+				this->label1->Text =this->lastw+" : "+this->Width+"="+rez;
+			 }
+		 }
 };
 }
 
