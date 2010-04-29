@@ -251,11 +251,13 @@ namespace RoboEnvCompiler {
 			// 
 			// tbInput
 			// 
+			this->tbInput->Font = (gcnew System::Drawing::Font(L"Courier New", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
+				static_cast<System::Byte>(0)));
 			this->tbInput->Location = System::Drawing::Point(12, 27);
 			this->tbInput->Multiline = true;
 			this->tbInput->Name = L"tbInput";
 			this->tbInput->ScrollBars = System::Windows::Forms::ScrollBars::Both;
-			this->tbInput->Size = System::Drawing::Size(670, 416);
+			this->tbInput->Size = System::Drawing::Size(773, 416);
 			this->tbInput->TabIndex = 4;
 			this->tbInput->TextChanged += gcnew System::EventHandler(this, &Form1::tbInput_TextChanged);
 			// 
@@ -369,22 +371,33 @@ private: System::Void saveCtrlSToolStripMenuItem_Click(System::Object^  sender, 
 			 if(String::IsNullOrEmpty(this->textFilePath))
 			 {
 				 this->saveFileDialog1->ShowDialog();
-				 this->saveFileDialog1->FileName;
+				 this->textFilePath=this->saveFileDialog1->FileName;
 			 }
-			 else{
-
+			 if(!String::IsNullOrEmpty(this->textFilePath))
+			 {
+				this->saveFile(this->textFilePath);
+				this->Text="RoboEnvCompiler-"+textFilePath;
+				this->statusStrip1->Text="Saved to file:" + this->textFilePath;
 			 }
-			 this->Text="RoboEnvCompiler-"+textFilePath;
+			
 		 }
 private: System::Void saveFileDialog1_FileOk(System::Object^  sender, System::ComponentModel::CancelEventArgs^  e) {
 
-			 FileStream ^fs= gcnew FileStream(this->textFilePath,FileMode::OpenOrCreate,FileAccess::Write);
-			 StreamWriter ^sw = gcnew StreamWriter(fs);
-			 for(int i=0;i<=this->tbInput->Lines->Length;i++)
-				 sw->WriteLine(this->tbInput->Lines[i]);
-			 sw->Close();
-			 fs->Close();
-			 this->statusStrip1->Text="Saved to file:" + this->textFilePath;
+			 
+		 }
+
+
+private: void saveFile(String ^path)
+		 {
+			if(!String::IsNullOrEmpty(path))
+			 {
+				FileStream ^fs= gcnew FileStream(path,FileMode::OpenOrCreate,FileAccess::Write);
+				StreamWriter ^sw = gcnew StreamWriter(fs);
+				for(int i=0;i<this->tbInput->Lines->Length;i++)
+					sw->WriteLine(this->tbInput->Lines[i]);
+				sw->Close();
+				fs->Close();
+			 }
 		 }
 };
 }
