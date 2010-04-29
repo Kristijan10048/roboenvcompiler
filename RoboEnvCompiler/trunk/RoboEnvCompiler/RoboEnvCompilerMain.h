@@ -344,7 +344,7 @@ private: System::Void openFileDialog1_FileOk(System::Object^  sender, System::Co
 		{
 			this->Text="RoboEnvCompiler-"+textFilePath;
 			FileStream ^fs = gcnew FileStream(textFilePath,FileMode::Open,FileAccess::Read);
-			StreamReader ^sr = gcnew StreamReader(fs);		
+			StreamReader ^sr = gcnew StreamReader(fs,System::Text::Encoding::Default);		
 			this->tbInput->Text="";
 			while(!sr->EndOfStream)
 			{
