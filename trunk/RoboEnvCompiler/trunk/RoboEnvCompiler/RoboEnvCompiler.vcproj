@@ -277,7 +277,27 @@
 			</File>
 		</Filter>
 		<File
+			RelativePath=".\demo000.exe"
+			>
+		</File>
+		<File
+			RelativePath=".\example.txt"
+			>
+		</File>
+		<File
 			RelativePath=".\ReadMe.txt"
+			>
+		</File>
+		<File
+			RelativePath=".\t.txt"
+			>
+		</File>
+		<File
+			RelativePath=".\t2.txt"
+			>
+		</File>
+		<File
+			RelativePath=".\test.txt"
 			>
 		</File>
 	</Files>
