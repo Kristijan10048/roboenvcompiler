@@ -465,6 +465,7 @@ private: System::Void compileToolStripMenuItem_Click(System::Object^  sender, Sy
 			 si->UseShellExecute=false;
 			 si->FileName="demo000.exe";
 			 si->Arguments="\""+this->textFilePath+"\"";
+			 si->CreateNoWindow=true;
 			 this->groupBox1->Text=si->Arguments->ToString();
 			 si->RedirectStandardOutput=true;
 			 System::Diagnostics::Process ^p= System::Diagnostics::Process::Start(si);
