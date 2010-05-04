@@ -471,8 +471,13 @@ private: System::Void compileToolStripMenuItem_Click(System::Object^  sender, Sy
 			 System::Diagnostics::Process ^p= System::Diagnostics::Process::Start(si);
 			 p->WaitForExit();
 			 String ^str=p->StandardOutput->ReadToEnd();
+			 this->tbOutput->Text="";
 			 this->tbOutput->Text=str;
-				 
+
+			 //autoscrol
+			 this->tbOutput->SelectionStart=this->tbOutput->TextLength;
+			 this->tbOutput->ScrollToCaret();
+			 
 		
 		 }
 private: System::Void newToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
