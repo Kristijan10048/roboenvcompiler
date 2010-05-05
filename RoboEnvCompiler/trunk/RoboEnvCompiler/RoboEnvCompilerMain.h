@@ -1,9 +1,8 @@
 #pragma once
 
 #include "aboutForm.h"
-//#include "windows.h"
-//#include <shellapi.h>
-//#pragma comment(lib,"shell32.lib") 
+#include "errorList.h"
+
 
 namespace RoboEnvCompiler {
 
@@ -66,7 +65,7 @@ namespace RoboEnvCompiler {
 	private: System::Windows::Forms::ToolStripMenuItem^  exitAltF4ToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  helpToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  aboutToolStripMenuItem;
-	private: System::Windows::Forms::TextBox^  tbInput;
+
 
 	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItem1;
 	private: System::Windows::Forms::ToolStripMenuItem^  compileToolStripMenuItem;
@@ -96,6 +95,14 @@ namespace RoboEnvCompiler {
 
 	private: System::Windows::Forms::GroupBox^  groupBox1;
 	private: System::Windows::Forms::ToolStripMenuItem^  newToolStripMenuItem;
+	private: System::Windows::Forms::RichTextBox^  tbInput;
+	private: System::Windows::Forms::ToolStripStatusLabel^  toolStripStatusLabel1;
+
+
+
+
+
+
 	private: 
 
 	private:
@@ -115,6 +122,7 @@ namespace RoboEnvCompiler {
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
 			this->fileToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->openCtrlOToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->newToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->saveCtrlSToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->saveAsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->exitAltF4ToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -128,23 +136,25 @@ namespace RoboEnvCompiler {
 			this->stepOverToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->helpToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->aboutToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->tbInput = (gcnew System::Windows::Forms::TextBox());
 			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
 			this->saveFileDialog1 = (gcnew System::Windows::Forms::SaveFileDialog());
 			this->tbOutput = (gcnew System::Windows::Forms::TextBox());
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
-			this->newToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->tbInput = (gcnew System::Windows::Forms::RichTextBox());
+			this->toolStripStatusLabel1 = (gcnew System::Windows::Forms::ToolStripStatusLabel());
+			this->statusStrip1->SuspendLayout();
 			this->menuStrip1->SuspendLayout();
 			this->groupBox1->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// statusStrip1
 			// 
+			this->statusStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) {this->toolStripStatusLabel1});
 			this->statusStrip1->Location = System::Drawing::Point(0, 554);
 			this->statusStrip1->Name = L"statusStrip1";
-			this->statusStrip1->Size = System::Drawing::Size(795, 22);
+			this->statusStrip1->Size = System::Drawing::Size(794, 22);
 			this->statusStrip1->TabIndex = 2;
-			this->statusStrip1->Text = L"statusStrip1";
+			this->statusStrip1->Text = L"statusStrip1SZszd";
 			// 
 			// menuStrip1
 			// 
@@ -152,7 +162,7 @@ namespace RoboEnvCompiler {
 				this->editToolStripMenuItem, this->toolStripMenuItem1, this->helpToolStripMenuItem});
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
-			this->menuStrip1->Size = System::Drawing::Size(795, 24);
+			this->menuStrip1->Size = System::Drawing::Size(794, 24);
 			this->menuStrip1->TabIndex = 3;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
@@ -168,22 +178,30 @@ namespace RoboEnvCompiler {
 			// 
 			this->openCtrlOToolStripMenuItem->Name = L"openCtrlOToolStripMenuItem";
 			this->openCtrlOToolStripMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::D0));
-			this->openCtrlOToolStripMenuItem->Size = System::Drawing::Size(152, 22);
+			this->openCtrlOToolStripMenuItem->Size = System::Drawing::Size(149, 22);
 			this->openCtrlOToolStripMenuItem->Text = L"Open";
 			this->openCtrlOToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::openCtrlOToolStripMenuItem_Click);
+			// 
+			// newToolStripMenuItem
+			// 
+			this->newToolStripMenuItem->Name = L"newToolStripMenuItem";
+			this->newToolStripMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::N));
+			this->newToolStripMenuItem->Size = System::Drawing::Size(149, 22);
+			this->newToolStripMenuItem->Text = L"New";
+			this->newToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::newToolStripMenuItem_Click);
 			// 
 			// saveCtrlSToolStripMenuItem
 			// 
 			this->saveCtrlSToolStripMenuItem->Name = L"saveCtrlSToolStripMenuItem";
 			this->saveCtrlSToolStripMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::S));
-			this->saveCtrlSToolStripMenuItem->Size = System::Drawing::Size(152, 22);
+			this->saveCtrlSToolStripMenuItem->Size = System::Drawing::Size(149, 22);
 			this->saveCtrlSToolStripMenuItem->Text = L"Save";
 			this->saveCtrlSToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::saveCtrlSToolStripMenuItem_Click);
 			// 
 			// saveAsToolStripMenuItem
 			// 
 			this->saveAsToolStripMenuItem->Name = L"saveAsToolStripMenuItem";
-			this->saveAsToolStripMenuItem->Size = System::Drawing::Size(152, 22);
+			this->saveAsToolStripMenuItem->Size = System::Drawing::Size(149, 22);
 			this->saveAsToolStripMenuItem->Text = L"Save as..";
 			this->saveAsToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::saveAsToolStripMenuItem_Click);
 			// 
@@ -191,7 +209,7 @@ namespace RoboEnvCompiler {
 			// 
 			this->exitAltF4ToolStripMenuItem->Name = L"exitAltF4ToolStripMenuItem";
 			this->exitAltF4ToolStripMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Alt | System::Windows::Forms::Keys::F4));
-			this->exitAltF4ToolStripMenuItem->Size = System::Drawing::Size(152, 22);
+			this->exitAltF4ToolStripMenuItem->Size = System::Drawing::Size(149, 22);
 			this->exitAltF4ToolStripMenuItem->Text = L"Exit";
 			this->exitAltF4ToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::exitAltF4ToolStripMenuItem_Click);
 			// 
@@ -252,6 +270,7 @@ namespace RoboEnvCompiler {
 			this->stepOverToolStripMenuItem->Name = L"stepOverToolStripMenuItem";
 			this->stepOverToolStripMenuItem->Size = System::Drawing::Size(155, 22);
 			this->stepOverToolStripMenuItem->Text = L"Step Over F10";
+			this->stepOverToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::stepOverToolStripMenuItem_Click);
 			// 
 			// helpToolStripMenuItem
 			// 
@@ -266,18 +285,6 @@ namespace RoboEnvCompiler {
 			this->aboutToolStripMenuItem->Size = System::Drawing::Size(114, 22);
 			this->aboutToolStripMenuItem->Text = L"About";
 			this->aboutToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::aboutToolStripMenuItem_Click);
-			// 
-			// tbInput
-			// 
-			this->tbInput->Font = (gcnew System::Drawing::Font(L"Courier New", 10, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
-				static_cast<System::Byte>(0)));
-			this->tbInput->Location = System::Drawing::Point(12, 27);
-			this->tbInput->Multiline = true;
-			this->tbInput->Name = L"tbInput";
-			this->tbInput->ScrollBars = System::Windows::Forms::ScrollBars::Both;
-			this->tbInput->Size = System::Drawing::Size(773, 346);
-			this->tbInput->TabIndex = 4;
-			this->tbInput->TextChanged += gcnew System::EventHandler(this, &Form1::tbInput_TextChanged);
 			// 
 			// openFileDialog1
 			// 
@@ -302,26 +309,35 @@ namespace RoboEnvCompiler {
 			this->groupBox1->Dock = System::Windows::Forms::DockStyle::Bottom;
 			this->groupBox1->Location = System::Drawing::Point(0, 379);
 			this->groupBox1->Name = L"groupBox1";
-			this->groupBox1->Size = System::Drawing::Size(795, 175);
+			this->groupBox1->Size = System::Drawing::Size(794, 175);
 			this->groupBox1->TabIndex = 6;
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"groupBox1";
 			// 
-			// newToolStripMenuItem
+			// tbInput
 			// 
-			this->newToolStripMenuItem->Name = L"newToolStripMenuItem";
-			this->newToolStripMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::N));
-			this->newToolStripMenuItem->Size = System::Drawing::Size(152, 22);
-			this->newToolStripMenuItem->Text = L"New";
-			this->newToolStripMenuItem->Click += gcnew System::EventHandler(this, &Form1::newToolStripMenuItem_Click);
+			this->tbInput->Font = (gcnew System::Drawing::Font(L"Courier New", 10));
+			this->tbInput->Location = System::Drawing::Point(12, 27);
+			this->tbInput->Name = L"tbInput";
+			this->tbInput->Size = System::Drawing::Size(773, 346);
+			this->tbInput->TabIndex = 6;
+			this->tbInput->Text = L"";
+			this->tbInput->CursorChanged += gcnew System::EventHandler(this, &Form1::tbInput_CursorChanged);
+			this->tbInput->SelectionChanged += gcnew System::EventHandler(this, &Form1::tbInput_SelectionChanged);
+			this->tbInput->TextChanged += gcnew System::EventHandler(this, &Form1::tbInput_TextChanged);
+			// 
+			// toolStripStatusLabel1
+			// 
+			this->toolStripStatusLabel1->Name = L"toolStripStatusLabel1";
+			this->toolStripStatusLabel1->Size = System::Drawing::Size(0, 17);
 			// 
 			// Form1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(795, 576);
-			this->Controls->Add(this->groupBox1);
+			this->ClientSize = System::Drawing::Size(794, 576);
 			this->Controls->Add(this->tbInput);
+			this->Controls->Add(this->groupBox1);
 			this->Controls->Add(this->statusStrip1);
 			this->Controls->Add(this->menuStrip1);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
@@ -330,6 +346,8 @@ namespace RoboEnvCompiler {
 			this->Text = L"RoboEnvCompiler";
 			this->Load += gcnew System::EventHandler(this, &Form1::Form1_Load);
 			this->SizeChanged += gcnew System::EventHandler(this, &Form1::Form1_SizeChanged);
+			this->statusStrip1->ResumeLayout(false);
+			this->statusStrip1->PerformLayout();
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
 			this->groupBox1->ResumeLayout(false);
@@ -412,9 +430,9 @@ private: System::Void openFileDialog1_FileOk(System::Object^  sender, System::Co
 			}
 			sr->Close();
 			fs->Close();
-		}
-
+		}	
 	}
+
 private: System::Void selectAllToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 			 this->tbInput->SelectAll();
 		 }
@@ -423,6 +441,9 @@ private: System::Void tbInput_TextChanged(System::Object^  sender, System::Event
 			 if(this->fileChanged)
 				this->Text="RoboEnvCompiler-"+textFilePath+"*";
 			 this->fileChanged=true;
+
+
+
 		 }
 private: System::Void saveCtrlSToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 
@@ -458,9 +479,7 @@ private: void saveFile(String ^path)
 			 }
 		 }
 private: System::Void compileToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
-			// ShellExecute(0,"open","demo000.exe","",".",1);
-
-			//ShellExecute();
+			
 			 System::Diagnostics::ProcessStartInfo ^si = gcnew System::Diagnostics::ProcessStartInfo();
 			 si->UseShellExecute=false;
 			 si->FileName="demo000.exe";
@@ -473,17 +492,83 @@ private: System::Void compileToolStripMenuItem_Click(System::Object^  sender, Sy
 			 String ^str=p->StandardOutput->ReadToEnd();
 			 this->tbOutput->Text="";
 			 this->tbOutput->Text=str;
+			
+			 errorList ^f = gcnew errorList();
+			 String ^line;
+			 int len=this->tbOutput->Lines->Length;
+			 for(int i=0;i<len;i++)
+			 {
+				line=this->tbOutput->Lines[i];
+				this->markRedLine(line,f);
+			 }
+				
+			
 
 			 //autoscrol
 			 this->tbOutput->SelectionStart=this->tbOutput->TextLength;
-			 this->tbOutput->ScrollToCaret();
+			 this->tbOutput->ScrollToCaret();	
+
+			  f->Show();
 			 
-		
+		 }
+private: void markRedLine(String ^str ,errorList ^fp){
+			// String spl[];
+			 array<String^>^ spl=str->Split(':');
+			 //int i;
+			 //int line = int::Parse(spl[0]);
+			 //int col = int::Parse(spl[1]);
+			
+			 //int inpline=curline->Length;
+			 if(spl->Length==3)
+			 if(spl[2]=="NEPOZNAT")
+			 {
+				 fp->addRow(spl[0],spl[1],spl[2]);
+			 }
+
+		}
+
+private: void markLine(int pos)
+		 {
+			 int offset=0;
+			 int i;
+			 for(i=0;i<pos;i++)
+				 offset+=this->tbInput->Lines[i]->Length;
+
+			int inpline=this->tbInput->Lines[pos]->Length;
+
+			this->tbInput->Select(offset+1, inpline );
+			this->tbInput->SelectionColor=Color::Red;
+			this->tbInput->Select(0,0);
 		 }
 private: System::Void newToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 			 this->tbInput->Text="";
 			 this->textFilePath="";
 			 this->fileChanged=false;
+		 }
+
+private: System::Void stepOverToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+			  
+			  
+			//  this->tbInput->SelectedText=this->tbInput->Lines[0]->ToString();
+			// this->tbInput->Select(0,4);
+		//	 this->markLine(5);
+			 //this->tbInput->selection
+			// this->tbInput->SelectionBackColor=Color::Magenta;
+			//  this->tbInput->SelectionColor=Color::White;
+			//  this->tbInput->Select(0,0);
+			//	MessageBox ^mb = gcnew MessageBox(;
+			// mb->Show("test");
+			
+		 }
+private: System::Void tbInput_CursorChanged(System::Object^  sender, System::EventArgs^  e) {
+			 
+		 }
+private: System::Void tbInput_SelectionChanged(System::Object^  sender, System::EventArgs^  e) {
+			 int sstart=this->tbInput->SelectionStart;//
+			 int col=sstart-this->tbInput->GetFirstCharIndexOfCurrentLine()+1;
+			 int line=this->tbInput->GetLineFromCharIndex(sstart)+1;
+
+			 this->toolStripStatusLabel1->Text="Line:"+line+" Column:"+col;
 		 }
 };
 }
