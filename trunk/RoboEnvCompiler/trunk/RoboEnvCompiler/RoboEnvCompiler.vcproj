@@ -204,6 +204,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\errorList.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\RoboEnvCompiler.cpp"
 				>
 			</File>
@@ -239,6 +243,16 @@
 				>
 				<File
 					RelativePath=".\aboutForm.resx"
+					SubType="Designer"
+					>
+				</File>
+			</File>
+			<File
+				RelativePath=".\errorList.h"
+				FileType="3"
+				>
+				<File
+					RelativePath=".\errorList.resx"
 					SubType="Designer"
 					>
 				</File>
@@ -282,6 +296,10 @@
 		</File>
 		<File
 			RelativePath=".\example.txt"
+			>
+		</File>
+		<File
+			RelativePath="..\..\..\..\..\..\Predmeti od fak\kompajleri\Line_Numbers_v1.2_src\c# Line Numbers\testApp\linenum_rtf.cs"
 			>
 		</File>
 		<File
