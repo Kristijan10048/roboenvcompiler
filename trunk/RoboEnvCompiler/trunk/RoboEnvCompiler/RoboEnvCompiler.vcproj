@@ -262,6 +262,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\resource1.h"
+				>
+			</File>
+			<File
 				RelativePath=".\RoboEnvCompilerMain.h"
 				FileType="3"
 				>
@@ -296,10 +300,6 @@
 		</File>
 		<File
 			RelativePath=".\example.txt"
-			>
-		</File>
-		<File
-			RelativePath="..\..\..\..\..\..\Predmeti od fak\kompajleri\Line_Numbers_v1.2_src\c# Line Numbers\testApp\linenum_rtf.cs"
 			>
 		</File>
 		<File
