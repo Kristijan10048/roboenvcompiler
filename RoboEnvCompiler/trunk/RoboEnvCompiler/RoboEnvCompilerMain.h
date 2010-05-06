@@ -198,7 +198,7 @@ namespace RoboEnvCompiler {
 			this->openCtrlOToolStripMenuItem->Image = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"openCtrlOToolStripMenuItem.Image")));
 			this->openCtrlOToolStripMenuItem->Name = L"openCtrlOToolStripMenuItem";
 			this->openCtrlOToolStripMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::D0));
-			this->openCtrlOToolStripMenuItem->Size = System::Drawing::Size(152, 22);
+			this->openCtrlOToolStripMenuItem->Size = System::Drawing::Size(149, 22);
 			this->openCtrlOToolStripMenuItem->Text = L"Open";
 			this->openCtrlOToolStripMenuItem->Click += gcnew System::EventHandler(this, &RoboEnvCompilerMain::openCtrlOToolStripMenuItem_Click);
 			// 
@@ -207,7 +207,7 @@ namespace RoboEnvCompiler {
 			this->newToolStripMenuItem->Image = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"newToolStripMenuItem.Image")));
 			this->newToolStripMenuItem->Name = L"newToolStripMenuItem";
 			this->newToolStripMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::N));
-			this->newToolStripMenuItem->Size = System::Drawing::Size(152, 22);
+			this->newToolStripMenuItem->Size = System::Drawing::Size(149, 22);
 			this->newToolStripMenuItem->Text = L"New";
 			this->newToolStripMenuItem->Click += gcnew System::EventHandler(this, &RoboEnvCompilerMain::newToolStripMenuItem_Click);
 			// 
@@ -216,7 +216,7 @@ namespace RoboEnvCompiler {
 			this->saveCtrlSToolStripMenuItem->Image = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"saveCtrlSToolStripMenuItem.Image")));
 			this->saveCtrlSToolStripMenuItem->Name = L"saveCtrlSToolStripMenuItem";
 			this->saveCtrlSToolStripMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Control | System::Windows::Forms::Keys::S));
-			this->saveCtrlSToolStripMenuItem->Size = System::Drawing::Size(152, 22);
+			this->saveCtrlSToolStripMenuItem->Size = System::Drawing::Size(149, 22);
 			this->saveCtrlSToolStripMenuItem->Text = L"Save";
 			this->saveCtrlSToolStripMenuItem->Click += gcnew System::EventHandler(this, &RoboEnvCompilerMain::saveCtrlSToolStripMenuItem_Click);
 			// 
@@ -224,7 +224,7 @@ namespace RoboEnvCompiler {
 			// 
 			this->saveAsToolStripMenuItem->Image = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"saveAsToolStripMenuItem.Image")));
 			this->saveAsToolStripMenuItem->Name = L"saveAsToolStripMenuItem";
-			this->saveAsToolStripMenuItem->Size = System::Drawing::Size(152, 22);
+			this->saveAsToolStripMenuItem->Size = System::Drawing::Size(149, 22);
 			this->saveAsToolStripMenuItem->Text = L"Save as..";
 			this->saveAsToolStripMenuItem->Click += gcnew System::EventHandler(this, &RoboEnvCompilerMain::saveAsToolStripMenuItem_Click);
 			// 
@@ -233,7 +233,7 @@ namespace RoboEnvCompiler {
 			this->exitAltF4ToolStripMenuItem->Image = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"exitAltF4ToolStripMenuItem.Image")));
 			this->exitAltF4ToolStripMenuItem->Name = L"exitAltF4ToolStripMenuItem";
 			this->exitAltF4ToolStripMenuItem->ShortcutKeys = static_cast<System::Windows::Forms::Keys>((System::Windows::Forms::Keys::Alt | System::Windows::Forms::Keys::F4));
-			this->exitAltF4ToolStripMenuItem->Size = System::Drawing::Size(152, 22);
+			this->exitAltF4ToolStripMenuItem->Size = System::Drawing::Size(149, 22);
 			this->exitAltF4ToolStripMenuItem->Text = L"Exit";
 			this->exitAltF4ToolStripMenuItem->Click += gcnew System::EventHandler(this, &RoboEnvCompilerMain::exitAltF4ToolStripMenuItem_Click);
 			// 
@@ -322,7 +322,7 @@ namespace RoboEnvCompiler {
 			// 
 			this->aboutToolStripMenuItem->Image = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"aboutToolStripMenuItem.Image")));
 			this->aboutToolStripMenuItem->Name = L"aboutToolStripMenuItem";
-			this->aboutToolStripMenuItem->Size = System::Drawing::Size(152, 22);
+			this->aboutToolStripMenuItem->Size = System::Drawing::Size(114, 22);
 			this->aboutToolStripMenuItem->Text = L"About";
 			this->aboutToolStripMenuItem->Click += gcnew System::EventHandler(this, &RoboEnvCompilerMain::aboutToolStripMenuItem_Click);
 			// 
@@ -388,6 +388,7 @@ namespace RoboEnvCompiler {
 			this->Controls->Add(this->statusStrip1);
 			this->Controls->Add(this->menuStrip1);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^  >(resources->GetObject(L"$this.Icon")));
 			this->MainMenuStrip = this->menuStrip1;
 			this->Name = L"RoboEnvCompilerMain";
 			this->Text = L"RoboEnvCompiler";
