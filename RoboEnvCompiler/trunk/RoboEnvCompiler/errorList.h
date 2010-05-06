@@ -43,9 +43,21 @@ namespace RoboEnvCompiler {
 		}
 	private: System::Windows::Forms::Button^  okbut;
 	private: System::Windows::Forms::DataGridView^  errorGrid;
+	private: System::Windows::Forms::DataGridViewImageColumn^  imgError;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Line;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  column;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Error;
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -77,9 +89,11 @@ namespace RoboEnvCompiler {
 		{
 			System::Windows::Forms::DataGridViewCellStyle^  dataGridViewCellStyle2 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
 			System::Windows::Forms::DataGridViewCellStyle^  dataGridViewCellStyle3 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(errorList::typeid));
 			System::Windows::Forms::DataGridViewCellStyle^  dataGridViewCellStyle1 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
 			this->okbut = (gcnew System::Windows::Forms::Button());
 			this->errorGrid = (gcnew System::Windows::Forms::DataGridView());
+			this->imgError = (gcnew System::Windows::Forms::DataGridViewImageColumn());
 			this->Line = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->column = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Error = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
@@ -100,8 +114,8 @@ namespace RoboEnvCompiler {
 			// 
 			this->errorGrid->BackgroundColor = System::Drawing::SystemColors::ControlLight;
 			this->errorGrid->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->errorGrid->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(3) {this->Line, this->column, 
-				this->Error});
+			this->errorGrid->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(4) {this->imgError, this->Line, 
+				this->column, this->Error});
 			dataGridViewCellStyle2->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
 			dataGridViewCellStyle2->BackColor = System::Drawing::SystemColors::Window;
 			dataGridViewCellStyle2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Regular, 
@@ -120,6 +134,15 @@ namespace RoboEnvCompiler {
 			this->errorGrid->RowsDefaultCellStyle = dataGridViewCellStyle3;
 			this->errorGrid->Size = System::Drawing::Size(825, 445);
 			this->errorGrid->TabIndex = 2;
+			// 
+			// imgError
+			// 
+			this->imgError->HeaderText = L"";
+			this->imgError->Image = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"imgError.Image")));
+			this->imgError->Name = L"imgError";
+			this->imgError->ReadOnly = true;
+			this->imgError->Resizable = System::Windows::Forms::DataGridViewTriState::False;
+			this->imgError->Width = 24;
 			// 
 			// Line
 			// 
@@ -152,6 +175,7 @@ namespace RoboEnvCompiler {
 			this->Controls->Add(this->errorGrid);
 			this->Controls->Add(this->okbut);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::Fixed3D;
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^  >(resources->GetObject(L"$this.Icon")));
 			this->Name = L"errorList";
 			this->Text = L"errorList";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->errorGrid))->EndInit();
@@ -166,9 +190,10 @@ namespace RoboEnvCompiler {
 	 public: void addRow(String ^line,String ^column,String^ error)
 			 {
 				 int i=this->errorGrid->Rows->Add();
-				 this->errorGrid->Rows[i]->Cells[0]->Value=line;
-				 this->errorGrid->Rows[i]->Cells[1]->Value=column;
-				 this->errorGrid->Rows[i]->Cells[2]->Value=error+": Внесениот карактер не е препознаен од јазикот";
+				// this->errorGrid->Rows[i]->
+				 this->errorGrid->Rows[i]->Cells[1]->Value=line;
+				 this->errorGrid->Rows[i]->Cells[2]->Value=column;
+				 this->errorGrid->Rows[i]->Cells[3]->Value=error+": Внесениот карактер не е препознаен од јазикот";
 			 }
 };
 }

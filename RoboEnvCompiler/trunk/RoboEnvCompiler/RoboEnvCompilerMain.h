@@ -2,7 +2,7 @@
 
 #include "aboutForm.h"
 #include "errorList.h"
-
+#include "tokensBox.h"
 
 namespace RoboEnvCompiler {
 
@@ -76,6 +76,8 @@ namespace RoboEnvCompiler {
 	private: int razw;
 	private: int razh;
 
+	private: errorList ^f; 
+
 	private: int razOutw;
 	private: int razouth;
 	private: bool saved;
@@ -99,6 +101,20 @@ namespace RoboEnvCompiler {
 	private: System::Windows::Forms::ToolStripStatusLabel^  toolStripStatusLabel1;
 	private: System::Windows::Forms::ToolStripMenuItem^  cutToolStripMenuItem;
 	private: System::Windows::Forms::PictureBox^  pictureBox1;
+	private: System::Windows::Forms::ToolStripMenuItem^  showErrorListToolStripMenuItem;
+	private: System::Windows::Forms::ToolStrip^  toolStrip1;
+	private: System::Windows::Forms::ToolStripButton^  toolStripButton1;
+	private: System::Windows::Forms::ToolStripButton^  toolStripButton2;
+	private: System::Windows::Forms::ToolStripButton^  toolStripButton3;
+	private: System::Windows::Forms::ToolStripSeparator^  toolStripSeparator1;
+	private: System::Windows::Forms::ToolStripButton^  toolStripButton4;
+	private: System::Windows::Forms::ToolStripButton^  toolStripButton5;
+	private: System::Windows::Forms::ToolStripButton^  toolStripButton6;
+	private: System::Windows::Forms::ToolStripButton^  toolStripButton7;
+	private: System::Windows::Forms::ToolStripSeparator^  toolStripSeparator2;
+	private: System::Windows::Forms::ToolStripButton^  toolStripButton8;
+	private: System::Windows::Forms::ToolStripButton^  toolStripButton9;
+
 
 
 
@@ -147,6 +163,7 @@ namespace RoboEnvCompiler {
 			this->toolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->compileToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->stepOverToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->showErrorListToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->helpToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->aboutToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
@@ -155,16 +172,29 @@ namespace RoboEnvCompiler {
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
 			this->tbInput = (gcnew System::Windows::Forms::RichTextBox());
+			this->toolStrip1 = (gcnew System::Windows::Forms::ToolStrip());
+			this->toolStripButton1 = (gcnew System::Windows::Forms::ToolStripButton());
+			this->toolStripButton2 = (gcnew System::Windows::Forms::ToolStripButton());
+			this->toolStripButton3 = (gcnew System::Windows::Forms::ToolStripButton());
+			this->toolStripSeparator1 = (gcnew System::Windows::Forms::ToolStripSeparator());
+			this->toolStripButton4 = (gcnew System::Windows::Forms::ToolStripButton());
+			this->toolStripButton5 = (gcnew System::Windows::Forms::ToolStripButton());
+			this->toolStripButton6 = (gcnew System::Windows::Forms::ToolStripButton());
+			this->toolStripButton7 = (gcnew System::Windows::Forms::ToolStripButton());
+			this->toolStripSeparator2 = (gcnew System::Windows::Forms::ToolStripSeparator());
+			this->toolStripButton8 = (gcnew System::Windows::Forms::ToolStripButton());
+			this->toolStripButton9 = (gcnew System::Windows::Forms::ToolStripButton());
 			this->statusStrip1->SuspendLayout();
 			this->menuStrip1->SuspendLayout();
 			this->groupBox1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->pictureBox1))->BeginInit();
+			this->toolStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// statusStrip1
 			// 
 			this->statusStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) {this->toolStripStatusLabel1});
-			this->statusStrip1->Location = System::Drawing::Point(0, 554);
+			this->statusStrip1->Location = System::Drawing::Point(0, 574);
 			this->statusStrip1->Name = L"statusStrip1";
 			this->statusStrip1->Size = System::Drawing::Size(794, 22);
 			this->statusStrip1->TabIndex = 2;
@@ -290,8 +320,8 @@ namespace RoboEnvCompiler {
 			// 
 			// toolStripMenuItem1
 			// 
-			this->toolStripMenuItem1->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {this->compileToolStripMenuItem, 
-				this->stepOverToolStripMenuItem});
+			this->toolStripMenuItem1->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {this->compileToolStripMenuItem, 
+				this->stepOverToolStripMenuItem, this->showErrorListToolStripMenuItem});
 			this->toolStripMenuItem1->Name = L"toolStripMenuItem1";
 			this->toolStripMenuItem1->Size = System::Drawing::Size(41, 20);
 			this->toolStripMenuItem1->Text = L"Build";
@@ -310,6 +340,14 @@ namespace RoboEnvCompiler {
 			this->stepOverToolStripMenuItem->Size = System::Drawing::Size(155, 22);
 			this->stepOverToolStripMenuItem->Text = L"Step Over F10";
 			this->stepOverToolStripMenuItem->Click += gcnew System::EventHandler(this, &RoboEnvCompilerMain::stepOverToolStripMenuItem_Click);
+			// 
+			// showErrorListToolStripMenuItem
+			// 
+			this->showErrorListToolStripMenuItem->Image = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"showErrorListToolStripMenuItem.Image")));
+			this->showErrorListToolStripMenuItem->Name = L"showErrorListToolStripMenuItem";
+			this->showErrorListToolStripMenuItem->Size = System::Drawing::Size(155, 22);
+			this->showErrorListToolStripMenuItem->Text = L"Show error list";
+			this->showErrorListToolStripMenuItem->Click += gcnew System::EventHandler(this, &RoboEnvCompilerMain::showErrorListToolStripMenuItem_Click);
 			// 
 			// helpToolStripMenuItem
 			// 
@@ -348,7 +386,7 @@ namespace RoboEnvCompiler {
 			this->groupBox1->Controls->Add(this->pictureBox1);
 			this->groupBox1->Controls->Add(this->tbOutput);
 			this->groupBox1->Dock = System::Windows::Forms::DockStyle::Bottom;
-			this->groupBox1->Location = System::Drawing::Point(0, 329);
+			this->groupBox1->Location = System::Drawing::Point(0, 349);
 			this->groupBox1->Name = L"groupBox1";
 			this->groupBox1->Size = System::Drawing::Size(794, 225);
 			this->groupBox1->TabIndex = 6;
@@ -365,24 +403,138 @@ namespace RoboEnvCompiler {
 			this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::AutoSize;
 			this->pictureBox1->TabIndex = 6;
 			this->pictureBox1->TabStop = false;
+			this->pictureBox1->Click += gcnew System::EventHandler(this, &RoboEnvCompilerMain::pictureBox1_Click);
 			// 
 			// tbInput
 			// 
 			this->tbInput->Font = (gcnew System::Drawing::Font(L"Courier New", 10));
-			this->tbInput->Location = System::Drawing::Point(12, 27);
+			this->tbInput->Location = System::Drawing::Point(12, 58);
 			this->tbInput->Name = L"tbInput";
-			this->tbInput->Size = System::Drawing::Size(773, 296);
+			this->tbInput->Size = System::Drawing::Size(770, 285);
 			this->tbInput->TabIndex = 6;
 			this->tbInput->Text = L"";
 			this->tbInput->CursorChanged += gcnew System::EventHandler(this, &RoboEnvCompilerMain::tbInput_CursorChanged);
 			this->tbInput->SelectionChanged += gcnew System::EventHandler(this, &RoboEnvCompilerMain::tbInput_SelectionChanged);
 			this->tbInput->TextChanged += gcnew System::EventHandler(this, &RoboEnvCompilerMain::tbInput_TextChanged);
 			// 
+			// toolStrip1
+			// 
+			this->toolStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(11) {this->toolStripButton1, 
+				this->toolStripButton2, this->toolStripButton3, this->toolStripSeparator1, this->toolStripButton4, this->toolStripButton5, this->toolStripButton6, 
+				this->toolStripButton7, this->toolStripSeparator2, this->toolStripButton8, this->toolStripButton9});
+			this->toolStrip1->Location = System::Drawing::Point(0, 24);
+			this->toolStrip1->Name = L"toolStrip1";
+			this->toolStrip1->Size = System::Drawing::Size(794, 25);
+			this->toolStrip1->TabIndex = 7;
+			this->toolStrip1->Text = L"toolStrip1";
+			// 
+			// toolStripButton1
+			// 
+			this->toolStripButton1->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Image;
+			this->toolStripButton1->Image = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"toolStripButton1.Image")));
+			this->toolStripButton1->ImageTransparentColor = System::Drawing::Color::Magenta;
+			this->toolStripButton1->Name = L"toolStripButton1";
+			this->toolStripButton1->Size = System::Drawing::Size(23, 22);
+			this->toolStripButton1->Text = L"toolStripButton1";
+			this->toolStripButton1->ToolTipText = L"Open";
+			// 
+			// toolStripButton2
+			// 
+			this->toolStripButton2->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Image;
+			this->toolStripButton2->Image = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"toolStripButton2.Image")));
+			this->toolStripButton2->ImageTransparentColor = System::Drawing::Color::Magenta;
+			this->toolStripButton2->Name = L"toolStripButton2";
+			this->toolStripButton2->Size = System::Drawing::Size(23, 22);
+			this->toolStripButton2->Text = L"toolStripButton2";
+			this->toolStripButton2->ToolTipText = L"New";
+			// 
+			// toolStripButton3
+			// 
+			this->toolStripButton3->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Image;
+			this->toolStripButton3->Image = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"toolStripButton3.Image")));
+			this->toolStripButton3->ImageTransparentColor = System::Drawing::Color::Magenta;
+			this->toolStripButton3->Name = L"toolStripButton3";
+			this->toolStripButton3->Size = System::Drawing::Size(23, 22);
+			this->toolStripButton3->Text = L"toolStripButton3";
+			this->toolStripButton3->ToolTipText = L"Save";
+			// 
+			// toolStripSeparator1
+			// 
+			this->toolStripSeparator1->Name = L"toolStripSeparator1";
+			this->toolStripSeparator1->Size = System::Drawing::Size(6, 25);
+			// 
+			// toolStripButton4
+			// 
+			this->toolStripButton4->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Image;
+			this->toolStripButton4->Image = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"toolStripButton4.Image")));
+			this->toolStripButton4->ImageTransparentColor = System::Drawing::Color::Magenta;
+			this->toolStripButton4->Name = L"toolStripButton4";
+			this->toolStripButton4->Size = System::Drawing::Size(23, 22);
+			this->toolStripButton4->Text = L"toolStripButton4";
+			this->toolStripButton4->ToolTipText = L"Copy";
+			// 
+			// toolStripButton5
+			// 
+			this->toolStripButton5->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Image;
+			this->toolStripButton5->Image = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"toolStripButton5.Image")));
+			this->toolStripButton5->ImageTransparentColor = System::Drawing::Color::Magenta;
+			this->toolStripButton5->Name = L"toolStripButton5";
+			this->toolStripButton5->Size = System::Drawing::Size(23, 22);
+			this->toolStripButton5->Text = L"toolStripButton5";
+			this->toolStripButton5->ToolTipText = L"Cut";
+			// 
+			// toolStripButton6
+			// 
+			this->toolStripButton6->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Image;
+			this->toolStripButton6->Image = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"toolStripButton6.Image")));
+			this->toolStripButton6->ImageTransparentColor = System::Drawing::Color::Magenta;
+			this->toolStripButton6->Name = L"toolStripButton6";
+			this->toolStripButton6->Size = System::Drawing::Size(23, 22);
+			this->toolStripButton6->Text = L"toolStripButton6";
+			this->toolStripButton6->ToolTipText = L"Paste";
+			// 
+			// toolStripButton7
+			// 
+			this->toolStripButton7->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Image;
+			this->toolStripButton7->Image = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"toolStripButton7.Image")));
+			this->toolStripButton7->ImageTransparentColor = System::Drawing::Color::Magenta;
+			this->toolStripButton7->Name = L"toolStripButton7";
+			this->toolStripButton7->Size = System::Drawing::Size(23, 22);
+			this->toolStripButton7->Text = L"toolStripButton7";
+			this->toolStripButton7->ToolTipText = L"Find";
+			// 
+			// toolStripSeparator2
+			// 
+			this->toolStripSeparator2->Name = L"toolStripSeparator2";
+			this->toolStripSeparator2->Size = System::Drawing::Size(6, 25);
+			// 
+			// toolStripButton8
+			// 
+			this->toolStripButton8->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Image;
+			this->toolStripButton8->Image = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"toolStripButton8.Image")));
+			this->toolStripButton8->ImageTransparentColor = System::Drawing::Color::Magenta;
+			this->toolStripButton8->Name = L"toolStripButton8";
+			this->toolStripButton8->Size = System::Drawing::Size(23, 22);
+			this->toolStripButton8->Text = L"toolStripButton8";
+			this->toolStripButton8->ToolTipText = L"Compile";
+			this->toolStripButton8->Click += gcnew System::EventHandler(this, &RoboEnvCompilerMain::compileToolStripMenuItem_Click);
+			// 
+			// toolStripButton9
+			// 
+			this->toolStripButton9->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Image;
+			this->toolStripButton9->Image = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"toolStripButton9.Image")));
+			this->toolStripButton9->ImageTransparentColor = System::Drawing::Color::Magenta;
+			this->toolStripButton9->Name = L"toolStripButton9";
+			this->toolStripButton9->Size = System::Drawing::Size(23, 22);
+			this->toolStripButton9->Text = L"toolStripButton9";
+			this->toolStripButton9->ToolTipText = L"Show error list";
+			// 
 			// RoboEnvCompilerMain
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(794, 576);
+			this->ClientSize = System::Drawing::Size(794, 596);
+			this->Controls->Add(this->toolStrip1);
 			this->Controls->Add(this->tbInput);
 			this->Controls->Add(this->groupBox1);
 			this->Controls->Add(this->statusStrip1);
@@ -401,6 +553,8 @@ namespace RoboEnvCompiler {
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->pictureBox1))->EndInit();
+			this->toolStrip1->ResumeLayout(false);
+			this->toolStrip1->PerformLayout();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -542,7 +696,7 @@ private: System::Void compileToolStripMenuItem_Click(System::Object^  sender, Sy
 			 this->tbOutput->Text="";
 			 this->tbOutput->Text=str;
 			
-			 errorList ^f = gcnew errorList();
+			 f = gcnew errorList();
 			 String ^line;
 			 int len=this->tbOutput->Lines->Length;
 			 for(int i=0;i<len;i++)
@@ -629,6 +783,13 @@ private: System::Void cutToolStripMenuItem_Click(System::Object^  sender, System
 private: System::Void pasteToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 			// Clipboard::GetText();
 			 this->tbInput->Paste();
+		 }
+private: System::Void pictureBox1_Click(System::Object^  sender, System::EventArgs^  e) {
+			 tokensBox ^tbox = gcnew tokensBox();
+			 tbox->Show();
+		 }
+private: System::Void showErrorListToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+			// if()
 		 }
 };
 }
