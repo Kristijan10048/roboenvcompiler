@@ -231,6 +231,10 @@
 					/>
 				</FileConfiguration>
 			</File>
+			<File
+				RelativePath=".\tokensBox.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -278,6 +282,16 @@
 			<File
 				RelativePath=".\stdafx.h"
 				>
+			</File>
+			<File
+				RelativePath=".\tokensBox.h"
+				FileType="3"
+				>
+				<File
+					RelativePath=".\tokensBox.resx"
+					SubType="Designer"
+					>
+				</File>
 			</File>
 		</Filter>
 		<Filter
