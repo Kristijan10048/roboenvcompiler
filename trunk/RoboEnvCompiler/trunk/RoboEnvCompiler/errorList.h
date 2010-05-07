@@ -61,6 +61,10 @@ namespace RoboEnvCompiler {
 
 
 
+
+
+
+
 	protected: 
 
 
@@ -112,7 +116,8 @@ namespace RoboEnvCompiler {
 			// 
 			// errorGrid
 			// 
-			this->errorGrid->BackgroundColor = System::Drawing::SystemColors::ControlLight;
+			this->errorGrid->BackgroundColor = System::Drawing::SystemColors::ActiveCaptionText;
+			this->errorGrid->BorderStyle = System::Windows::Forms::BorderStyle::None;
 			this->errorGrid->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->errorGrid->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(4) {this->imgError, this->Line, 
 				this->column, this->Error});
@@ -126,6 +131,7 @@ namespace RoboEnvCompiler {
 			dataGridViewCellStyle2->WrapMode = System::Windows::Forms::DataGridViewTriState::False;
 			this->errorGrid->DefaultCellStyle = dataGridViewCellStyle2;
 			this->errorGrid->Dock = System::Windows::Forms::DockStyle::Top;
+			this->errorGrid->GridColor = System::Drawing::SystemColors::Control;
 			this->errorGrid->Location = System::Drawing::Point(0, 0);
 			this->errorGrid->Name = L"errorGrid";
 			dataGridViewCellStyle3->Font = (gcnew System::Drawing::Font(L"Tahoma", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
@@ -149,12 +155,14 @@ namespace RoboEnvCompiler {
 			this->Line->HeaderText = L"Line";
 			this->Line->Name = L"Line";
 			this->Line->ReadOnly = true;
+			this->Line->Width = 50;
 			// 
 			// column
 			// 
 			this->column->HeaderText = L"Column";
 			this->column->Name = L"column";
 			this->column->ReadOnly = true;
+			this->column->Width = 50;
 			// 
 			// Error
 			// 

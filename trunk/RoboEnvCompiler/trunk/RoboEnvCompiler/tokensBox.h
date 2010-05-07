@@ -114,5 +114,9 @@ namespace RoboEnvCompiler {
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
 				 this->Hide();
 			 }
+	public: void setText(String ^txt)
+			{
+				this->richTextBox1->Text=txt;
+			}
 	};
 }
