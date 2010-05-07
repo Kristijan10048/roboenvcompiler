@@ -208,6 +208,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\parser.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\RoboEnvCompiler.cpp"
 				>
 			</File>
@@ -260,6 +264,10 @@
 					SubType="Designer"
 					>
 				</File>
+			</File>
+			<File
+				RelativePath=".\parser.h"
+				>
 			</File>
 			<File
 				RelativePath=".\resource.h"
