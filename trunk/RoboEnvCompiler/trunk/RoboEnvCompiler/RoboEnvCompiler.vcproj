@@ -345,6 +345,10 @@
 			>
 		</File>
 		<File
+			RelativePath=".\t1c.txt"
+			>
+		</File>
+		<File
 			RelativePath=".\t2.txt"
 			>
 		</File>
