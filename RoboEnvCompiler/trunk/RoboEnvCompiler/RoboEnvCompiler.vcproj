@@ -321,7 +321,7 @@
 			</File>
 		</Filter>
 		<File
-			RelativePath="D:\test\conv.exe"
+			RelativePath=".\conv.exe"
 			>
 		</File>
 		<File
@@ -330,6 +330,10 @@
 		</File>
 		<File
 			RelativePath=".\example.txt"
+			>
+		</File>
+		<File
+			RelativePath=".\parser.exe"
 			>
 		</File>
 		<File
