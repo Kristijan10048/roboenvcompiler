@@ -83,6 +83,7 @@ namespace RoboEnvCompiler {
 	private: bool saved;
 	private: bool fileChanged;
 	private: String ^textFilePath;
+	private: static String ^componentsPath="C:\\Documents and Settings\\Kristijan\\My Documents\\Visual Studio 2008\\Projects\\kompajleri\\robocompiler\\RoboEnvCompiler\\RoboEnvCompiler\\";
 	private: System::Windows::Forms::ToolStripMenuItem^  openCtrlOToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  saveCtrlSToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  saveAsToolStripMenuItem;
@@ -165,6 +166,7 @@ namespace RoboEnvCompiler {
 			this->compileToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->showErrorListToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->stepOverToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->checkSintaxToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->helpToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->aboutToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
@@ -185,7 +187,6 @@ namespace RoboEnvCompiler {
 			this->toolStripSeparator2 = (gcnew System::Windows::Forms::ToolStripSeparator());
 			this->toolStripButton8 = (gcnew System::Windows::Forms::ToolStripButton());
 			this->toolStripButton9 = (gcnew System::Windows::Forms::ToolStripButton());
-			this->checkSintaxToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->statusStrip1->SuspendLayout();
 			this->menuStrip1->SuspendLayout();
 			this->groupBox1->SuspendLayout();
@@ -351,6 +352,13 @@ namespace RoboEnvCompiler {
 			this->stepOverToolStripMenuItem->Text = L"Step Over F10";
 			this->stepOverToolStripMenuItem->Click += gcnew System::EventHandler(this, &RoboEnvCompilerMain::stepOverToolStripMenuItem_Click);
 			// 
+			// checkSintaxToolStripMenuItem
+			// 
+			this->checkSintaxToolStripMenuItem->Name = L"checkSintaxToolStripMenuItem";
+			this->checkSintaxToolStripMenuItem->Size = System::Drawing::Size(155, 22);
+			this->checkSintaxToolStripMenuItem->Text = L"Check sintax";
+			this->checkSintaxToolStripMenuItem->Click += gcnew System::EventHandler(this, &RoboEnvCompilerMain::checkSintaxToolStripMenuItem_Click);
+			// 
 			// helpToolStripMenuItem
 			// 
 			this->helpToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) {this->aboutToolStripMenuItem});
@@ -368,7 +376,8 @@ namespace RoboEnvCompiler {
 			// 
 			// openFileDialog1
 			// 
-			this->openFileDialog1->Filter = L"Text Files (.txt)|*.txt|All Files (*.*)|*.*";
+			this->openFileDialog1->Filter = L"Enviroment files (*.env)|*.env|RoboL files (*.rob)|*.rob|Text Files (.txt)|*.txt|" 
+				L"All Files (*.*)|*.*";
 			this->openFileDialog1->FileOk += gcnew System::ComponentModel::CancelEventHandler(this, &RoboEnvCompilerMain::openFileDialog1_FileOk);
 			// 
 			// saveFileDialog1
@@ -413,6 +422,7 @@ namespace RoboEnvCompiler {
 			// tbInput
 			// 
 			this->tbInput->AcceptsTab = true;
+			this->tbInput->EnableAutoDragDrop = true;
 			this->tbInput->Font = (gcnew System::Drawing::Font(L"Courier New", 10));
 			this->tbInput->Location = System::Drawing::Point(12, 58);
 			this->tbInput->Name = L"tbInput";
@@ -540,13 +550,6 @@ namespace RoboEnvCompiler {
 			this->toolStripButton9->Text = L"toolStripButton9";
 			this->toolStripButton9->ToolTipText = L"Show error list";
 			this->toolStripButton9->Click += gcnew System::EventHandler(this, &RoboEnvCompilerMain::showErrorListToolStripMenuItem_Click);
-			// 
-			// checkSintaxToolStripMenuItem
-			// 
-			this->checkSintaxToolStripMenuItem->Name = L"checkSintaxToolStripMenuItem";
-			this->checkSintaxToolStripMenuItem->Size = System::Drawing::Size(155, 22);
-			this->checkSintaxToolStripMenuItem->Text = L"Check sintax";
-			this->checkSintaxToolStripMenuItem->Click += gcnew System::EventHandler(this, &RoboEnvCompilerMain::checkSintaxToolStripMenuItem_Click);
 			// 
 			// RoboEnvCompilerMain
 			// 
@@ -713,7 +716,7 @@ private: System::Void compileToolStripMenuItem_Click(System::Object^  sender, Sy
 				
 				System::Diagnostics::ProcessStartInfo ^si = gcnew System::Diagnostics::ProcessStartInfo();
 				si->UseShellExecute=false;
-				si->FileName="demo000.exe";
+				si->FileName=componentsPath+"demo000.exe";
 				si->Arguments="\""+this->textFilePath+"\"";			
 				si->CreateNoWindow=true;				
 				si->RedirectStandardOutput=true;
@@ -830,7 +833,7 @@ private: System::Void checkSintaxToolStripMenuItem_Click(System::Object^  sender
 			 //startuvanje na konvertor
 			 System::Diagnostics::ProcessStartInfo ^convertor = gcnew System::Diagnostics::ProcessStartInfo();
 			 convertor->UseShellExecute=false;
-			 convertor->FileName="conv.exe";
+			 convertor->FileName=componentsPath+"conv.exe";
 			 convertor->Arguments="\""+this->textFilePath+"\""+" tmp.txt";			
 			 convertor->CreateNoWindow=true;				
 			 convertor->RedirectStandardOutput=true;
@@ -845,7 +848,7 @@ private: System::Void checkSintaxToolStripMenuItem_Click(System::Object^  sender
 			 //startuvanje na parser
 			 System::Diagnostics::ProcessStartInfo ^parser = gcnew System::Diagnostics::ProcessStartInfo();
 			 parser->UseShellExecute=false;
-			 parser->FileName="parser.exe";
+			 parser->FileName=componentsPath+"parser.exe";
 			 parser->Arguments="tmp.txt";			
 			 parser->CreateNoWindow=true;				
 			 parser->RedirectStandardOutput=true;
