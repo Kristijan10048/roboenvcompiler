@@ -42,11 +42,20 @@ namespace RoboEnvCompiler {
 			}
 		}
 	private: System::Windows::Forms::Button^  okbut;
+
+
+
+
+
+	private: System::Windows::Forms::TableLayoutPanel^  tableLayoutPanel1;
 	private: System::Windows::Forms::DataGridView^  errorGrid;
 	private: System::Windows::Forms::DataGridViewImageColumn^  imgError;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Line;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  column;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Error;
+	private: System::Windows::Forms::GroupBox^  groupBox1;
+
+
 
 
 
@@ -96,23 +105,47 @@ namespace RoboEnvCompiler {
 			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(errorList::typeid));
 			System::Windows::Forms::DataGridViewCellStyle^  dataGridViewCellStyle1 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
 			this->okbut = (gcnew System::Windows::Forms::Button());
+			this->tableLayoutPanel1 = (gcnew System::Windows::Forms::TableLayoutPanel());
 			this->errorGrid = (gcnew System::Windows::Forms::DataGridView());
 			this->imgError = (gcnew System::Windows::Forms::DataGridViewImageColumn());
 			this->Line = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->column = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Error = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
+			this->tableLayoutPanel1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->errorGrid))->BeginInit();
+			this->groupBox1->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// okbut
 			// 
-			this->okbut->Location = System::Drawing::Point(375, 462);
+			this->okbut->Location = System::Drawing::Point(375, 3);
 			this->okbut->Name = L"okbut";
-			this->okbut->Size = System::Drawing::Size(75, 23);
+			this->okbut->Size = System::Drawing::Size(75, 22);
 			this->okbut->TabIndex = 1;
 			this->okbut->Text = L"OK";
 			this->okbut->UseVisualStyleBackColor = true;
 			this->okbut->Click += gcnew System::EventHandler(this, &errorList::okbut_Click);
+			// 
+			// tableLayoutPanel1
+			// 
+			this->tableLayoutPanel1->ColumnCount = 3;
+			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 
+				50)));
+			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute, 
+				81)));
+			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 
+				50)));
+			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Absolute, 
+				20)));
+			this->tableLayoutPanel1->Controls->Add(this->okbut, 1, 0);
+			this->tableLayoutPanel1->Dock = System::Windows::Forms::DockStyle::Bottom;
+			this->tableLayoutPanel1->Location = System::Drawing::Point(0, 469);
+			this->tableLayoutPanel1->Name = L"tableLayoutPanel1";
+			this->tableLayoutPanel1->RowCount = 1;
+			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 39.35484F)));
+			this->tableLayoutPanel1->Size = System::Drawing::Size(825, 28);
+			this->tableLayoutPanel1->TabIndex = 4;
 			// 
 			// errorGrid
 			// 
@@ -130,16 +163,16 @@ namespace RoboEnvCompiler {
 			dataGridViewCellStyle2->SelectionForeColor = System::Drawing::SystemColors::HighlightText;
 			dataGridViewCellStyle2->WrapMode = System::Windows::Forms::DataGridViewTriState::False;
 			this->errorGrid->DefaultCellStyle = dataGridViewCellStyle2;
-			this->errorGrid->Dock = System::Windows::Forms::DockStyle::Top;
+			this->errorGrid->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->errorGrid->GridColor = System::Drawing::SystemColors::Control;
-			this->errorGrid->Location = System::Drawing::Point(0, 0);
+			this->errorGrid->Location = System::Drawing::Point(3, 16);
 			this->errorGrid->Name = L"errorGrid";
 			dataGridViewCellStyle3->Font = (gcnew System::Drawing::Font(L"Tahoma", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, 
 				static_cast<System::Byte>(204)));
 			dataGridViewCellStyle3->ForeColor = System::Drawing::Color::Red;
 			this->errorGrid->RowsDefaultCellStyle = dataGridViewCellStyle3;
-			this->errorGrid->Size = System::Drawing::Size(825, 445);
-			this->errorGrid->TabIndex = 2;
+			this->errorGrid->Size = System::Drawing::Size(795, 432);
+			this->errorGrid->TabIndex = 5;
 			// 
 			// imgError
 			// 
@@ -175,18 +208,33 @@ namespace RoboEnvCompiler {
 			this->Error->Name = L"Error";
 			this->Error->ReadOnly = true;
 			// 
+			// groupBox1
+			// 
+			this->groupBox1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Bottom) 
+				| System::Windows::Forms::AnchorStyles::Left) 
+				| System::Windows::Forms::AnchorStyles::Right));
+			this->groupBox1->Controls->Add(this->errorGrid);
+			this->groupBox1->Location = System::Drawing::Point(12, 12);
+			this->groupBox1->Name = L"groupBox1";
+			this->groupBox1->Size = System::Drawing::Size(801, 451);
+			this->groupBox1->TabIndex = 6;
+			this->groupBox1->TabStop = false;
+			this->groupBox1->Text = L"groupBox1";
+			// 
 			// errorList
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(825, 497);
-			this->Controls->Add(this->errorGrid);
-			this->Controls->Add(this->okbut);
+			this->Controls->Add(this->groupBox1);
+			this->Controls->Add(this->tableLayoutPanel1);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::Fixed3D;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^  >(resources->GetObject(L"$this.Icon")));
 			this->Name = L"errorList";
 			this->Text = L"errorList";
+			this->tableLayoutPanel1->ResumeLayout(false);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->errorGrid))->EndInit();
+			this->groupBox1->ResumeLayout(false);
 			this->ResumeLayout(false);
 
 		}

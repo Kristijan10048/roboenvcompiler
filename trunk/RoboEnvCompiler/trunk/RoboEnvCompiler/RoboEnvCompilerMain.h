@@ -693,12 +693,14 @@ private: void saveFile(String ^path)
 		 {
 			if(!String::IsNullOrEmpty(path))
 			 {
-				FileStream ^fs= gcnew FileStream(path,FileMode::OpenOrCreate,FileAccess::Write);
+				FileStream ^fs= gcnew FileStream(path,FileMode::Truncate,FileAccess::Write);
 				StreamWriter ^sw = gcnew StreamWriter(fs,System::Text::Encoding::Default);
-				for(int i=0;i<this->tbInput->Lines->Length;i++)
-					sw->WriteLine(this->tbInput->Lines[i]);
+				sw->Write(tbInput->Text);
 				sw->Close();
 				fs->Close();
+
+				/*for(int i=0;i<this->tbInput->Lines->Length;i++)
+					sw->WriteLine(this->tbInput->Lines[i]);*/
 			 }
 		 }
 private: System::Void compileToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
@@ -738,14 +740,10 @@ private: System::Void compileToolStripMenuItem_Click(System::Object^  sender, Sy
 					this->markRedLine(line,f);	
 				}			
 				
-
 				//autoscrol
 				this->tbOutput->SelectionStart=this->tbOutput->TextLength;
 				this->tbOutput->ScrollToCaret();	
-
-			  f->Show();
-			 
-			 
+			  f->Show();	 
 		 }
 private: void markRedLine(String ^str ,errorList ^fp){
 			// String spl[];
