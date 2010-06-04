@@ -849,12 +849,15 @@ private: System::Void checkSintaxToolStripMenuItem_Click(System::Object^  sender
 			 parser->Arguments="tmp.txt";			
 			 parser->CreateNoWindow=true;				
 			 parser->RedirectStandardOutput=true;
+			 parser->RedirectStandardError=true;
 
 			 System::Diagnostics::Process ^p1= System::Diagnostics::Process::Start(parser);
 			 p1->WaitForExit();
 			 String ^str1=p1->StandardOutput->ReadToEnd();
+			 String ^err=p1->StandardError->ReadToEnd();
 			 //this->tbOutput->Text="";
 			 this->tbOutput->Text+=str1;
+			 this->tbOutput->Text+=err;
 
 			 //end startuvanje na parser
 
