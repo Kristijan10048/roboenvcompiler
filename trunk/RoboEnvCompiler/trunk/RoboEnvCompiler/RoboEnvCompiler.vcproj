@@ -321,6 +321,10 @@
 			</File>
 		</Filter>
 		<File
+			RelativePath="D:\test\conv.exe"
+			>
+		</File>
+		<File
 			RelativePath=".\demo000.exe"
 			>
 		</File>

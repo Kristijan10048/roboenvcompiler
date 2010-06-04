@@ -114,6 +114,7 @@ namespace RoboEnvCompiler {
 	private: System::Windows::Forms::ToolStripSeparator^  toolStripSeparator2;
 	private: System::Windows::Forms::ToolStripButton^  toolStripButton8;
 	private: System::Windows::Forms::ToolStripButton^  toolStripButton9;
+	private: System::Windows::Forms::ToolStripMenuItem^  checkSintaxToolStripMenuItem;
 
 
 
@@ -184,6 +185,7 @@ namespace RoboEnvCompiler {
 			this->toolStripSeparator2 = (gcnew System::Windows::Forms::ToolStripSeparator());
 			this->toolStripButton8 = (gcnew System::Windows::Forms::ToolStripButton());
 			this->toolStripButton9 = (gcnew System::Windows::Forms::ToolStripButton());
+			this->checkSintaxToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->statusStrip1->SuspendLayout();
 			this->menuStrip1->SuspendLayout();
 			this->groupBox1->SuspendLayout();
@@ -320,8 +322,8 @@ namespace RoboEnvCompiler {
 			// 
 			// toolStripMenuItem1
 			// 
-			this->toolStripMenuItem1->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {this->compileToolStripMenuItem, 
-				this->showErrorListToolStripMenuItem, this->stepOverToolStripMenuItem});
+			this->toolStripMenuItem1->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {this->compileToolStripMenuItem, 
+				this->showErrorListToolStripMenuItem, this->stepOverToolStripMenuItem, this->checkSintaxToolStripMenuItem});
 			this->toolStripMenuItem1->Name = L"toolStripMenuItem1";
 			this->toolStripMenuItem1->Size = System::Drawing::Size(41, 20);
 			this->toolStripMenuItem1->Text = L"Build";
@@ -366,6 +368,7 @@ namespace RoboEnvCompiler {
 			// 
 			// openFileDialog1
 			// 
+			this->openFileDialog1->Filter = L"Text Files (.txt)|*.txt|All Files (*.*)|*.*";
 			this->openFileDialog1->FileOk += gcnew System::ComponentModel::CancelEventHandler(this, &RoboEnvCompilerMain::openFileDialog1_FileOk);
 			// 
 			// saveFileDialog1
@@ -374,11 +377,12 @@ namespace RoboEnvCompiler {
 			// 
 			// tbOutput
 			// 
-			this->tbOutput->Location = System::Drawing::Point(9, 31);
+			this->tbOutput->Dock = System::Windows::Forms::DockStyle::Bottom;
+			this->tbOutput->Location = System::Drawing::Point(3, 34);
 			this->tbOutput->Multiline = true;
 			this->tbOutput->Name = L"tbOutput";
 			this->tbOutput->ScrollBars = System::Windows::Forms::ScrollBars::Both;
-			this->tbOutput->Size = System::Drawing::Size(773, 188);
+			this->tbOutput->Size = System::Drawing::Size(788, 188);
 			this->tbOutput->TabIndex = 5;
 			// 
 			// groupBox1
@@ -396,10 +400,11 @@ namespace RoboEnvCompiler {
 			// pictureBox1
 			// 
 			this->pictureBox1->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->pictureBox1->Dock = System::Windows::Forms::DockStyle::Right;
 			this->pictureBox1->Image = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"pictureBox1.Image")));
-			this->pictureBox1->Location = System::Drawing::Point(762, 9);
+			this->pictureBox1->Location = System::Drawing::Point(775, 16);
 			this->pictureBox1->Name = L"pictureBox1";
-			this->pictureBox1->Size = System::Drawing::Size(16, 16);
+			this->pictureBox1->Size = System::Drawing::Size(16, 18);
 			this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::AutoSize;
 			this->pictureBox1->TabIndex = 6;
 			this->pictureBox1->TabStop = false;
@@ -416,8 +421,6 @@ namespace RoboEnvCompiler {
 			this->tbInput->Text = L"";
 			this->tbInput->CursorChanged += gcnew System::EventHandler(this, &RoboEnvCompilerMain::tbInput_CursorChanged);
 			this->tbInput->SelectionChanged += gcnew System::EventHandler(this, &RoboEnvCompilerMain::tbInput_SelectionChanged);
-			this->tbInput->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &RoboEnvCompilerMain::tbInput_KeyPress);
-			this->tbInput->TextChanged += gcnew System::EventHandler(this, &RoboEnvCompilerMain::tbInput_TextChanged);
 			// 
 			// toolStrip1
 			// 
@@ -537,6 +540,13 @@ namespace RoboEnvCompiler {
 			this->toolStripButton9->Text = L"toolStripButton9";
 			this->toolStripButton9->ToolTipText = L"Show error list";
 			this->toolStripButton9->Click += gcnew System::EventHandler(this, &RoboEnvCompilerMain::showErrorListToolStripMenuItem_Click);
+			// 
+			// checkSintaxToolStripMenuItem
+			// 
+			this->checkSintaxToolStripMenuItem->Name = L"checkSintaxToolStripMenuItem";
+			this->checkSintaxToolStripMenuItem->Size = System::Drawing::Size(155, 22);
+			this->checkSintaxToolStripMenuItem->Text = L"Check sintax";
+			this->checkSintaxToolStripMenuItem->Click += gcnew System::EventHandler(this, &RoboEnvCompilerMain::checkSintaxToolStripMenuItem_Click);
 			// 
 			// RoboEnvCompilerMain
 			// 
@@ -697,6 +707,8 @@ private: System::Void compileToolStripMenuItem_Click(System::Object^  sender, Sy
 				this->saveFile(this->textFilePath);
 			 }
 
+
+			 //stasrtuvanje na lekserot///////////////////////////////////////////////
 				this->Text="RoboEnvCompiler-"+textFilePath;
 				
 				System::Diagnostics::ProcessStartInfo ^si = gcnew System::Diagnostics::ProcessStartInfo();
@@ -719,10 +731,9 @@ private: System::Void compileToolStripMenuItem_Click(System::Object^  sender, Sy
 				for(int i=0;i<len;i++)
 				{
 					line=this->tbOutput->Lines[i];
-					this->markRedLine(line,f);
-				}
+					this->markRedLine(line,f);	
+				}			
 				
-			
 
 				//autoscrol
 				this->tbOutput->SelectionStart=this->tbOutput->TextLength;
@@ -814,14 +825,43 @@ private: System::Void showErrorListToolStripMenuItem_Click(System::Object^  send
 				 this->f->Show();
 			 //System::Windows::Forms::MessageBox::Show("test");
 		 }
-private: System::Void tbInput_KeyPress(System::Object^  sender, System::Windows::Forms::KeyPressEventArgs^  e) {
-			 	
-				if(e->KeyChar=='\t')
-				{
-					int sstart=this->tbInput->SelectionStart;
-					int line=this->tbInput->GetLineFromCharIndex(sstart)+1;
-					this->tbInput->Lines[line]->Insert(0,"\t");
-				}
+
+private: System::Void checkSintaxToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+			 //startuvanje na konvertor
+			 System::Diagnostics::ProcessStartInfo ^convertor = gcnew System::Diagnostics::ProcessStartInfo();
+			 convertor->UseShellExecute=false;
+			 convertor->FileName="conv.exe";
+			 convertor->Arguments="\""+this->textFilePath+"\""+" tmp.txt";			
+			 convertor->CreateNoWindow=true;				
+			 convertor->RedirectStandardOutput=true;
+
+			 System::Diagnostics::Process ^p= System::Diagnostics::Process::Start(convertor);
+			 p->WaitForExit();
+			 String ^str=p->StandardOutput->ReadToEnd();
+			 this->tbOutput->Text="";
+			 this->tbOutput->Text=str;
+			 //end startuvanje na konvertor
+
+			 //startuvanje na parser
+			 System::Diagnostics::ProcessStartInfo ^parser = gcnew System::Diagnostics::ProcessStartInfo();
+			 parser->UseShellExecute=false;
+			 parser->FileName="parser.exe";
+			 parser->Arguments="tmp.txt";			
+			 parser->CreateNoWindow=true;				
+			 parser->RedirectStandardOutput=true;
+
+			 System::Diagnostics::Process ^p1= System::Diagnostics::Process::Start(parser);
+			 p1->WaitForExit();
+			 String ^str1=p1->StandardOutput->ReadToEnd();
+			 //this->tbOutput->Text="";
+			 this->tbOutput->Text+=str1;
+
+			 //end startuvanje na parser
+
+			 //autoscrol
+				this->tbOutput->SelectionStart=this->tbOutput->TextLength;
+				this->tbOutput->ScrollToCaret();	
+				
 		 }
 };
 }
