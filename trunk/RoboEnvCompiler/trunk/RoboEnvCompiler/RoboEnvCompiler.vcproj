@@ -348,22 +348,6 @@
 			RelativePath=".\ReadMe.txt"
 			>
 		</File>
-		<File
-			RelativePath=".\t.txt"
-			>
-		</File>
-		<File
-			RelativePath=".\t1c.txt"
-			>
-		</File>
-		<File
-			RelativePath=".\t2.txt"
-			>
-		</File>
-		<File
-			RelativePath=".\test.txt"
-			>
-		</File>
 	</Files>
 	<Globals>
 	</Globals>
