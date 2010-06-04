@@ -115,7 +115,8 @@ namespace RoboEnvCompiler {
 	private: System::Windows::Forms::ToolStripSeparator^  toolStripSeparator2;
 	private: System::Windows::Forms::ToolStripButton^  toolStripButton8;
 	private: System::Windows::Forms::ToolStripButton^  toolStripButton9;
-	private: System::Windows::Forms::ToolStripMenuItem^  checkSintaxToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  checkSyntaxToolStripMenuItem;
+
 
 
 
@@ -166,7 +167,7 @@ namespace RoboEnvCompiler {
 			this->compileToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->showErrorListToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->stepOverToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->checkSintaxToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->checkSyntaxToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->helpToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->aboutToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
@@ -324,7 +325,7 @@ namespace RoboEnvCompiler {
 			// toolStripMenuItem1
 			// 
 			this->toolStripMenuItem1->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {this->compileToolStripMenuItem, 
-				this->showErrorListToolStripMenuItem, this->stepOverToolStripMenuItem, this->checkSintaxToolStripMenuItem});
+				this->showErrorListToolStripMenuItem, this->stepOverToolStripMenuItem, this->checkSyntaxToolStripMenuItem});
 			this->toolStripMenuItem1->Name = L"toolStripMenuItem1";
 			this->toolStripMenuItem1->Size = System::Drawing::Size(41, 20);
 			this->toolStripMenuItem1->Text = L"Build";
@@ -333,7 +334,7 @@ namespace RoboEnvCompiler {
 			// 
 			this->compileToolStripMenuItem->Image = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"compileToolStripMenuItem.Image")));
 			this->compileToolStripMenuItem->Name = L"compileToolStripMenuItem";
-			this->compileToolStripMenuItem->Size = System::Drawing::Size(155, 22);
+			this->compileToolStripMenuItem->Size = System::Drawing::Size(154, 22);
 			this->compileToolStripMenuItem->Text = L"Compile";
 			this->compileToolStripMenuItem->Click += gcnew System::EventHandler(this, &RoboEnvCompilerMain::compileToolStripMenuItem_Click);
 			// 
@@ -341,23 +342,23 @@ namespace RoboEnvCompiler {
 			// 
 			this->showErrorListToolStripMenuItem->Image = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"showErrorListToolStripMenuItem.Image")));
 			this->showErrorListToolStripMenuItem->Name = L"showErrorListToolStripMenuItem";
-			this->showErrorListToolStripMenuItem->Size = System::Drawing::Size(155, 22);
+			this->showErrorListToolStripMenuItem->Size = System::Drawing::Size(154, 22);
 			this->showErrorListToolStripMenuItem->Text = L"Show error list";
 			this->showErrorListToolStripMenuItem->Click += gcnew System::EventHandler(this, &RoboEnvCompilerMain::showErrorListToolStripMenuItem_Click);
 			// 
 			// stepOverToolStripMenuItem
 			// 
 			this->stepOverToolStripMenuItem->Name = L"stepOverToolStripMenuItem";
-			this->stepOverToolStripMenuItem->Size = System::Drawing::Size(155, 22);
-			this->stepOverToolStripMenuItem->Text = L"Step Over F10";
+			this->stepOverToolStripMenuItem->Size = System::Drawing::Size(154, 22);
+			this->stepOverToolStripMenuItem->Text = L"Step Over";
 			this->stepOverToolStripMenuItem->Click += gcnew System::EventHandler(this, &RoboEnvCompilerMain::stepOverToolStripMenuItem_Click);
 			// 
-			// checkSintaxToolStripMenuItem
+			// checkSyntaxToolStripMenuItem
 			// 
-			this->checkSintaxToolStripMenuItem->Name = L"checkSintaxToolStripMenuItem";
-			this->checkSintaxToolStripMenuItem->Size = System::Drawing::Size(155, 22);
-			this->checkSintaxToolStripMenuItem->Text = L"Check sintax";
-			this->checkSintaxToolStripMenuItem->Click += gcnew System::EventHandler(this, &RoboEnvCompilerMain::checkSintaxToolStripMenuItem_Click);
+			this->checkSyntaxToolStripMenuItem->Name = L"checkSyntaxToolStripMenuItem";
+			this->checkSyntaxToolStripMenuItem->Size = System::Drawing::Size(154, 22);
+			this->checkSyntaxToolStripMenuItem->Text = L"Syntax check";
+			this->checkSyntaxToolStripMenuItem->Click += gcnew System::EventHandler(this, &RoboEnvCompilerMain::checkSintaxToolStripMenuItem_Click);
 			// 
 			// helpToolStripMenuItem
 			// 
