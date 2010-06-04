@@ -337,6 +337,14 @@
 			>
 		</File>
 		<File
+			RelativePath=".\parserEnv.exe"
+			>
+		</File>
+		<File
+			RelativePath=".\parserProg.exe"
+			>
+		</File>
+		<File
 			RelativePath=".\ReadMe.txt"
 			>
 		</File>
