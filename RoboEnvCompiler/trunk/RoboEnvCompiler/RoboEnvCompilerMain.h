@@ -821,6 +821,7 @@ private: System::Void showErrorListToolStripMenuItem_Click(System::Object^  send
 		 }
 
 private: System::Void checkSintaxToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+			 this->ParseColor();			
 			 //startuvanje na konvertor
 			 System::Diagnostics::ProcessStartInfo ^convertor = gcnew System::Diagnostics::ProcessStartInfo();
 			 convertor->UseShellExecute=false;

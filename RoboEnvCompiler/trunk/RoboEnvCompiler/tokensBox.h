@@ -93,7 +93,6 @@ namespace RoboEnvCompiler {
 			this->groupBox1->Size = System::Drawing::Size(853, 528);
 			this->groupBox1->TabIndex = 2;
 			this->groupBox1->TabStop = false;
-			this->groupBox1->Text = L"groupBox1";
 			this->groupBox1->Enter += gcnew System::EventHandler(this, &tokensBox::groupBox1_Enter);
 			// 
 			// richTextBox1
