@@ -649,6 +649,7 @@ private: System::Void openFileDialog1_FileOk(System::Object^  sender, System::Co
 			}
 			sr->Close();
 			fs->Close();
+			this->ParseColor();
 		}	
 	}
 
@@ -870,6 +871,64 @@ private: System::Void checkSintaxToolStripMenuItem_Click(System::Object^  sender
 				this->tbOutput->ScrollToCaret();	
 				
 		 }
+
+
+
+
+		//kod za boenje na sintaksa
+		 	void ParseColor() {
+            // Foreach line in input,
+            // identify key words and format them when adding to the rich text box.
+			System::Text::RegularExpressions::Regex^ r = gcnew System::Text::RegularExpressions::Regex("\\n");
+			array<String^>^ lines = r->Split(this->tbInput->Text);
+            this->tbInput->Text = "";
+			for (int i=0;i<lines->Length;i++){
+				this->ParseLine(lines[i]);
+            }	
+			
+        }
+
+        void ParseLine(String^ line)
+        {
+            System::Text::RegularExpressions::Regex^ r = gcnew System::Text::RegularExpressions::Regex("([ \\t{}();])");
+            array<String^>^ tokens = r->Split(line);
+
+			for (int i=0; i<tokens->Length;i++)
+            {
+                // Set the token's default color and font.
+				tbInput->SelectionColor = System::Drawing::Color::Black;
+				tbInput->SelectionFont = gcnew System::Drawing::Font("Courier New", 10, System::Drawing::FontStyle::Regular);
+
+                // Check for a comment.
+                if (tokens[i] == "//" || tokens[i]->StartsWith("//"))
+                {
+                    // Find the start of the comment and then extract the whole comment.
+                    int index = line->IndexOf("//");
+					String^ comment = line->Substring(index, line->Length - index);
+					tbInput->SelectionColor = System::Drawing::Color::LightGreen;
+					tbInput->SelectionFont = gcnew System::Drawing::Font("Courier New", 10, System::Drawing::FontStyle::Regular);
+                    tbInput->SelectedText = comment;
+                    break;
+                }
+
+                // Check whether the token is a keyword. 
+				array<String^>^ keywords = { "Број", "Насока", "Променлива", "Почеток", "Крај", "Ѕидови", "Околина", "Ознаки", "Повторувај", "Пати", "почеток", "крај", "процедура", "Робот", "Околина" };
+                for (int k = 0; k < keywords->Length; k++)
+                {
+                    if (keywords[k] == tokens[i]){
+                        // Apply alternative color and font to highlight keyword.
+						tbInput->SelectionColor = System::Drawing::Color::Blue;
+						tbInput->SelectionFont = gcnew System::Drawing::Font("Courier New", 10, System::Drawing::FontStyle::Bold);
+                        break;
+                    }
+                }
+                tbInput->SelectedText = tokens[i];
+            }
+            tbInput->SelectedText = "\n";
+        } 
+	    //end of kod za boenje sintaksa
+
+
 };
 }
 
