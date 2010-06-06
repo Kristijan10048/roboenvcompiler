@@ -1,15 +1,15 @@
-procedura odi_k_chekori(Broj dz)
-pochetok
-	Povtoruvaj dz pati:
-	!
-		Odi
-	!
-	kraj
-
-procedura ()
-pochetok
-	odi_k_chekori(4)
-	SvrtiDesno
-	odi_k_chekori(2)
-kraj
+Okolina (6,5)
+Zidovi
+		Pochetok
+			IZ 2 2-5 Pochetok
+			SJ 3 2-4
+		Kraj
+Oznaki
+	Pochetok
+		(3,2)
+		(3,3) Oznaki
+		(4,2)
+		(4,3)
+	Kraj
+Robot Z(6,1)
 
