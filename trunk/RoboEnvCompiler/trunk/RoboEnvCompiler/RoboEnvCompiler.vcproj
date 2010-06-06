@@ -348,6 +348,38 @@
 			RelativePath=".\ReadMe.txt"
 			>
 		</File>
+		<File
+			RelativePath=".\testFiles\robo.rob"
+			>
+		</File>
+		<File
+			RelativePath=".\testFiles\t.txt"
+			>
+		</File>
+		<File
+			RelativePath=".\testFiles\t1c.txt"
+			>
+		</File>
+		<File
+			RelativePath=".\testFiles\t1Env.env"
+			>
+		</File>
+		<File
+			RelativePath=".\testFiles\t2.txt"
+			>
+		</File>
+		<File
+			RelativePath=".\testFiles\test.txt"
+			>
+		</File>
+		<File
+			RelativePath=".\testFiles\testtt.txt"
+			>
+		</File>
+		<File
+			RelativePath=".\testFiles\tmp.txt"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>
