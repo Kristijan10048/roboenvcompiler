@@ -117,6 +117,7 @@ namespace RoboEnvCompiler {
 	private: System::Windows::Forms::ToolStripButton^  toolStripButton9;
 	private: System::Windows::Forms::ToolStripMenuItem^  checkSyntaxToolStripMenuItem;
 	private: System::Windows::Forms::RichTextBox^  tbOutput;
+	private: System::Windows::Forms::FolderBrowserDialog^  folderBrowserDialog1;
 
 
 
@@ -175,6 +176,7 @@ namespace RoboEnvCompiler {
 			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
 			this->saveFileDialog1 = (gcnew System::Windows::Forms::SaveFileDialog());
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
+			this->tbOutput = (gcnew System::Windows::Forms::RichTextBox());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
 			this->tbInput = (gcnew System::Windows::Forms::RichTextBox());
 			this->toolStrip1 = (gcnew System::Windows::Forms::ToolStrip());
@@ -189,7 +191,7 @@ namespace RoboEnvCompiler {
 			this->toolStripSeparator2 = (gcnew System::Windows::Forms::ToolStripSeparator());
 			this->toolStripButton8 = (gcnew System::Windows::Forms::ToolStripButton());
 			this->toolStripButton9 = (gcnew System::Windows::Forms::ToolStripButton());
-			this->tbOutput = (gcnew System::Windows::Forms::RichTextBox());
+			this->folderBrowserDialog1 = (gcnew System::Windows::Forms::FolderBrowserDialog());
 			this->statusStrip1->SuspendLayout();
 			this->menuStrip1->SuspendLayout();
 			this->groupBox1->SuspendLayout();
@@ -401,6 +403,15 @@ namespace RoboEnvCompiler {
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"groupBox1";
 			// 
+			// tbOutput
+			// 
+			this->tbOutput->Dock = System::Windows::Forms::DockStyle::Bottom;
+			this->tbOutput->Location = System::Drawing::Point(3, 34);
+			this->tbOutput->Name = L"tbOutput";
+			this->tbOutput->Size = System::Drawing::Size(788, 188);
+			this->tbOutput->TabIndex = 9;
+			this->tbOutput->Text = L"";
+			// 
 			// pictureBox1
 			// 
 			this->pictureBox1->Cursor = System::Windows::Forms::Cursors::Hand;
@@ -545,15 +556,6 @@ namespace RoboEnvCompiler {
 			this->toolStripButton9->Text = L"toolStripButton9";
 			this->toolStripButton9->ToolTipText = L"Show error list";
 			this->toolStripButton9->Click += gcnew System::EventHandler(this, &RoboEnvCompilerMain::showErrorListToolStripMenuItem_Click);
-			// 
-			// tbOutput
-			// 
-			this->tbOutput->Dock = System::Windows::Forms::DockStyle::Bottom;
-			this->tbOutput->Location = System::Drawing::Point(3, 34);
-			this->tbOutput->Name = L"tbOutput";
-			this->tbOutput->Size = System::Drawing::Size(788, 188);
-			this->tbOutput->TabIndex = 9;
-			this->tbOutput->Text = L"";
 			// 
 			// RoboEnvCompilerMain
 			// 
@@ -821,11 +823,18 @@ private: System::Void showErrorListToolStripMenuItem_Click(System::Object^  send
 		 }
 
 private: System::Void checkSintaxToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+			 if(!File::Exists(componentsPath+"conv.exe")){
+				 this->folderBrowserDialog1->ShowDialog();
+				 this->componentsPath=this->folderBrowserDialog1->SelectedPath;
+			 }
+
+			 //boenje na kod				
 			 this->ParseColor();			
 			 //startuvanje na konvertor
 			 System::Diagnostics::ProcessStartInfo ^convertor = gcnew System::Diagnostics::ProcessStartInfo();
 			 convertor->UseShellExecute=false;
-			 convertor->FileName=componentsPath+"conv.exe";
+			 String ^strp="\""+componentsPath+"\\conv.exe"+"\"";
+			 convertor->FileName=strp;
 			 convertor->Arguments="\""+this->textFilePath+"\""+" tmp.txt";			
 			 convertor->CreateNoWindow=true;				
 			 convertor->RedirectStandardOutput=true;
@@ -850,9 +859,9 @@ private: System::Void checkSintaxToolStripMenuItem_Click(System::Object^  sender
 			 System::Diagnostics::ProcessStartInfo ^parser = gcnew System::Diagnostics::ProcessStartInfo();
 			 parser->UseShellExecute=false;
 			 if(ext==".env")
-				parser->FileName=componentsPath+"parserEnv.exe";
+				parser->FileName="\""+componentsPath+"\\parserEnv.exe"+"\"";
 			 if(ext==".rob")
-				 parser->FileName=componentsPath+"parserProg.exe";
+				 parser->FileName="\""+componentsPath+"\\parserProg.exe"+"\"";
 			 parser->Arguments="tmp.txt";			
 			 parser->CreateNoWindow=true;				
 			 parser->RedirectStandardOutput=true;
@@ -861,14 +870,22 @@ private: System::Void checkSintaxToolStripMenuItem_Click(System::Object^  sender
 			 System::Diagnostics::Process ^p1= System::Diagnostics::Process::Start(parser);
 			 p1->WaitForExit();
 			 String ^str1=p1->StandardOutput->ReadToEnd();
-			 String ^err=p1->StandardError->ReadToEnd();
-			 //this->tbOutput->Text="";
 			 this->tbOutput->Text+=str1;
 
-			 tbOutput->SelectionColor = System::Drawing::Color::Red;
-			 tbOutput->SelectionFont = gcnew System::Drawing::Font("Courier New", 10, System::Drawing::FontStyle::Regular);
-			 this->tbOutput->SelectedText=err;
+			  String ^err;
+			 
+			  while(!p1->StandardError->EndOfStream)
+			  {
+				    tbOutput->SelectionColor = System::Drawing::Color::Red;
+				    tbOutput->SelectionFont = gcnew System::Drawing::Font("Courier New", 10, System::Drawing::FontStyle::Regular);
+					err=p1->StandardError->ReadLine();
+					this->tbOutput->SelectedText+=this->parseErrorOut(err+"\r\n");
 
+			  }
+			 //this->tbOutput->Text="";
+			 
+			 
+			 
 			 //end startuvanje na parser
 
 			 //autoscrol
@@ -878,6 +895,27 @@ private: System::Void checkSintaxToolStripMenuItem_Click(System::Object^  sender
 		 }
 
 
+		String^ parseErrorOut(String ^line)
+		{
+			array<String^>^ errtokens = line->Split(' ');
+			int i;String ^res="";
+	
+			for(i=0;i<errtokens->Length;i++)
+			{
+				if(errtokens[i]=="line")				res+="линија";
+					else
+				if(errtokens[i]=="mismatched")			res+=" "+"не се софпаѓа";
+					else
+				if(errtokens[i]=="expecting")			res+=" "+"се очекува";
+					else
+				if(errtokens[i]=="extraneous")			res+=" "+"недефиниран";
+					else
+				if(errtokens[i]=="input")				res+=" "+"влез";
+				else
+					res+=" "+errtokens[i];
+			}
+			return res;
+		}
 
 
 		//kod za boenje na sintaksa
