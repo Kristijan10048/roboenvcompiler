@@ -1,0 +1,15 @@
+procedura odi_k_chekori(Broj dz)
+pochetok
+	Povtoruvaj dz pati:
+	!
+		Odi
+	!
+	kraj
+
+procedura ()
+pochetok
+	odi_k_chekori(4)
+	SvrtiDesno
+	odi_k_chekori(2)
+kraj
+
