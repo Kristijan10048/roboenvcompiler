@@ -609,14 +609,8 @@ private: System::Void RoboEnvCompilerMain_SizeChanged(System::Object^  sender, S
 			 {			
 				this->tbInput->Width=w-this->razw;		
 				this->tbInput->Height=h-this->razh;
-
 				this->groupBox1->Width=w-this->razw;
 				this->tbOutput->Width=w-this->razw;
-				//Point pos= new Point(10,10);
-				//Size sz= new Size(10,10);
-				//this->groupBox1->Location.Y=5;
-				//this->groupBox1->Location.X=5;
-				
 			 }
 			 if(this->WindowState == FormWindowState::Normal)
 			 {
@@ -638,10 +632,7 @@ private: System::Void saveAsToolStripMenuItem_Click(System::Object^  sender, Sys
 			 this->saveFileDialog1->ShowDialog();
 		 }
 private: System::Void openFileDialog1_FileOk(System::Object^  sender, System::ComponentModel::CancelEventArgs^  e) {
-	
-	   
-		textFilePath = this->openFileDialog1->FileName->ToString();
-		
+		textFilePath = this->openFileDialog1->FileName->ToString();		
 		if (!System::String::IsNullOrEmpty(textFilePath))
 		{
 			this->Text="RoboEnvCompiler-"+textFilePath;
@@ -693,7 +684,11 @@ private: void saveFile(String ^path)
 		 {
 			if(!String::IsNullOrEmpty(path))
 			 {
-				FileStream ^fs= gcnew FileStream(path,FileMode::Truncate,FileAccess::Write);
+				 FileStream ^fs;
+				 if(File::Exists(path))
+					fs= gcnew FileStream(path,FileMode::Truncate,FileAccess::Write);
+				 else
+					 fs= gcnew FileStream(path,FileMode::CreateNew,FileAccess::Write);
 				StreamWriter ^sw = gcnew StreamWriter(fs,System::Text::Encoding::Default);
 				sw->Write(tbInput->Text);
 				sw->Close();
@@ -704,7 +699,7 @@ private: void saveFile(String ^path)
 		 }
 private: System::Void compileToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 			
-			 if(this->textFilePath != nullptr)
+			 if(!String::IsNullOrEmpty(this->textFilePath))
 				 this->saveFile(this->textFilePath);
 			 else{
 				this->saveFileDialog1->ShowDialog();
@@ -713,6 +708,8 @@ private: System::Void compileToolStripMenuItem_Click(System::Object^  sender, Sy
 			 }
 
 			 //stasrtuvanje na lekserot///////////////////////////////////////////////
+			 if(!String::IsNullOrEmpty(this->textFilePath))
+			 {
 				this->Text="RoboEnvCompiler-"+textFilePath;
 				
 				System::Diagnostics::ProcessStartInfo ^si = gcnew System::Diagnostics::ProcessStartInfo();
@@ -736,21 +733,16 @@ private: System::Void compileToolStripMenuItem_Click(System::Object^  sender, Sy
 				{
 					line=this->tbOutput->Lines[i];
 					this->markRedLine(line,f);	
-				}			
-				
+				}	
 				//autoscrol
 				this->tbOutput->SelectionStart=this->tbOutput->TextLength;
 				this->tbOutput->ScrollToCaret();	
-			  f->Show();	 
+				f->Show();
+			}
 		 }
-private: void markRedLine(String ^str ,errorList ^fp){
-			// String spl[];
+private: void markRedLine(String ^str, errorList ^fp){
+
 			 array<String^>^ spl=str->Split(':');
-			 //int i;
-			 //int line = int::Parse(spl[0]);
-			 //int col = int::Parse(spl[1]);
-			
-			 //int inpline=curline->Length;
 			 if(spl->Length==3)
 			 if(spl[2]=="NEPOZNAT")
 			 {
@@ -801,7 +793,6 @@ private: System::Void tbInput_SelectionChanged(System::Object^  sender, System::
 			 int sstart=this->tbInput->SelectionStart;//
 			 int col=sstart-this->tbInput->GetFirstCharIndexOfCurrentLine()+1;
 			 int line=this->tbInput->GetLineFromCharIndex(sstart)+1;
-
 			 this->toolStripStatusLabel1->Text="Line:"+line+" Column:"+col;
 		 }
 private: System::Void copyToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
@@ -821,8 +812,7 @@ private: System::Void pictureBox1_Click(System::Object^  sender, System::EventAr
 			 tbox->Show();
 		 }
 private: System::Void showErrorListToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
-			 if(this->f != nullptr )
-				 this->f->Show();
+			 if(this->f != nullptr ) this->f->Show();
 			 //System::Windows::Forms::MessageBox::Show("test");
 		 }
 
