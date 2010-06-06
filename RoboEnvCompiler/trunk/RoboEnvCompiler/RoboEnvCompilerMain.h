@@ -383,6 +383,8 @@ namespace RoboEnvCompiler {
 			// 
 			// saveFileDialog1
 			// 
+			this->saveFileDialog1->Filter = L"Enviroment files (*.env)|*.env|RoboL files (*.rob)|*.rob|Text Files (.txt)|*.txt|" 
+				L"All Files (*.*)|*.*";
 			this->saveFileDialog1->FileOk += gcnew System::ComponentModel::CancelEventHandler(this, &RoboEnvCompilerMain::saveFileDialog1_FileOk);
 			// 
 			// tbOutput
@@ -829,13 +831,25 @@ private: System::Void checkSintaxToolStripMenuItem_Click(System::Object^  sender
 			 p->WaitForExit();
 			 String ^str=p->StandardOutput->ReadToEnd();
 			 this->tbOutput->Text="";
-			 this->tbOutput->Text=str;
+			 //this->tbOutput->Text=str;
 			 //end startuvanje na konvertor
+
+			// proverka na ekstenzija za tip na fajl
+			// if(String::IsNullOrEmpty(this->textFilePath))
+
+			 // ako ekstenzijata na fajlot e .env togas programta se parsira so 
+			//parserEnv.exe ako e .rob togas se parsira so parserProg.exe
+			 String ^ext = this->textFilePath->Substring(this->textFilePath->Length-4);
+			 this->tbOutput->Text+="extension:"+ext+"\r\n";
+
 
 			 //startuvanje na parser
 			 System::Diagnostics::ProcessStartInfo ^parser = gcnew System::Diagnostics::ProcessStartInfo();
 			 parser->UseShellExecute=false;
-			 parser->FileName=componentsPath+"parser.exe";
+			 if(ext==".env")
+				parser->FileName=componentsPath+"parserEnv.exe";
+			 if(ext==".rob")
+				 parser->FileName=componentsPath+"parserProg.exe";
 			 parser->Arguments="tmp.txt";			
 			 parser->CreateNoWindow=true;				
 			 parser->RedirectStandardOutput=true;
