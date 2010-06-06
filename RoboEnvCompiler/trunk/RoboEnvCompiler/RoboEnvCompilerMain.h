@@ -698,7 +698,6 @@ private: void saveFile(String ^path)
 				sw->Write(tbInput->Text);
 				sw->Close();
 				fs->Close();
-
 				/*for(int i=0;i<this->tbInput->Lines->Length;i++)
 					sw->WriteLine(this->tbInput->Lines[i]);*/
 			 }
@@ -712,7 +711,6 @@ private: System::Void compileToolStripMenuItem_Click(System::Object^  sender, Sy
 				this->textFilePath=this->saveFileDialog1->FileName;
 				this->saveFile(this->textFilePath);
 			 }
-
 
 			 //stasrtuvanje na lekserot///////////////////////////////////////////////
 				this->Text="RoboEnvCompiler-"+textFilePath;
