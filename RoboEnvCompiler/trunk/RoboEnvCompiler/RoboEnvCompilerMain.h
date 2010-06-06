@@ -94,7 +94,7 @@ namespace RoboEnvCompiler {
 	private: System::Windows::Forms::ToolStripMenuItem^  pasteToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  findToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  selectAllToolStripMenuItem;
-	private: System::Windows::Forms::TextBox^  tbOutput;
+
 
 	private: System::Windows::Forms::GroupBox^  groupBox1;
 	private: System::Windows::Forms::ToolStripMenuItem^  newToolStripMenuItem;
@@ -116,6 +116,8 @@ namespace RoboEnvCompiler {
 	private: System::Windows::Forms::ToolStripButton^  toolStripButton8;
 	private: System::Windows::Forms::ToolStripButton^  toolStripButton9;
 	private: System::Windows::Forms::ToolStripMenuItem^  checkSyntaxToolStripMenuItem;
+	private: System::Windows::Forms::RichTextBox^  tbOutput;
+
 
 
 
@@ -172,7 +174,6 @@ namespace RoboEnvCompiler {
 			this->aboutToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
 			this->saveFileDialog1 = (gcnew System::Windows::Forms::SaveFileDialog());
-			this->tbOutput = (gcnew System::Windows::Forms::TextBox());
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
 			this->tbInput = (gcnew System::Windows::Forms::RichTextBox());
@@ -188,6 +189,7 @@ namespace RoboEnvCompiler {
 			this->toolStripSeparator2 = (gcnew System::Windows::Forms::ToolStripSeparator());
 			this->toolStripButton8 = (gcnew System::Windows::Forms::ToolStripButton());
 			this->toolStripButton9 = (gcnew System::Windows::Forms::ToolStripButton());
+			this->tbOutput = (gcnew System::Windows::Forms::RichTextBox());
 			this->statusStrip1->SuspendLayout();
 			this->menuStrip1->SuspendLayout();
 			this->groupBox1->SuspendLayout();
@@ -387,20 +389,10 @@ namespace RoboEnvCompiler {
 				L"All Files (*.*)|*.*";
 			this->saveFileDialog1->FileOk += gcnew System::ComponentModel::CancelEventHandler(this, &RoboEnvCompilerMain::saveFileDialog1_FileOk);
 			// 
-			// tbOutput
-			// 
-			this->tbOutput->Dock = System::Windows::Forms::DockStyle::Bottom;
-			this->tbOutput->Location = System::Drawing::Point(3, 34);
-			this->tbOutput->Multiline = true;
-			this->tbOutput->Name = L"tbOutput";
-			this->tbOutput->ScrollBars = System::Windows::Forms::ScrollBars::Both;
-			this->tbOutput->Size = System::Drawing::Size(788, 188);
-			this->tbOutput->TabIndex = 5;
-			// 
 			// groupBox1
 			// 
-			this->groupBox1->Controls->Add(this->pictureBox1);
 			this->groupBox1->Controls->Add(this->tbOutput);
+			this->groupBox1->Controls->Add(this->pictureBox1);
 			this->groupBox1->Dock = System::Windows::Forms::DockStyle::Bottom;
 			this->groupBox1->Location = System::Drawing::Point(0, 349);
 			this->groupBox1->Name = L"groupBox1";
@@ -412,11 +404,11 @@ namespace RoboEnvCompiler {
 			// pictureBox1
 			// 
 			this->pictureBox1->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->pictureBox1->Dock = System::Windows::Forms::DockStyle::Right;
+			this->pictureBox1->Dock = System::Windows::Forms::DockStyle::Top;
 			this->pictureBox1->Image = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"pictureBox1.Image")));
-			this->pictureBox1->Location = System::Drawing::Point(775, 16);
+			this->pictureBox1->Location = System::Drawing::Point(3, 16);
 			this->pictureBox1->Name = L"pictureBox1";
-			this->pictureBox1->Size = System::Drawing::Size(16, 18);
+			this->pictureBox1->Size = System::Drawing::Size(788, 16);
 			this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::AutoSize;
 			this->pictureBox1->TabIndex = 6;
 			this->pictureBox1->TabStop = false;
@@ -553,6 +545,15 @@ namespace RoboEnvCompiler {
 			this->toolStripButton9->Text = L"toolStripButton9";
 			this->toolStripButton9->ToolTipText = L"Show error list";
 			this->toolStripButton9->Click += gcnew System::EventHandler(this, &RoboEnvCompilerMain::showErrorListToolStripMenuItem_Click);
+			// 
+			// tbOutput
+			// 
+			this->tbOutput->Dock = System::Windows::Forms::DockStyle::Bottom;
+			this->tbOutput->Location = System::Drawing::Point(3, 34);
+			this->tbOutput->Name = L"tbOutput";
+			this->tbOutput->Size = System::Drawing::Size(788, 188);
+			this->tbOutput->TabIndex = 9;
+			this->tbOutput->Text = L"";
 			// 
 			// RoboEnvCompilerMain
 			// 
@@ -862,7 +863,10 @@ private: System::Void checkSintaxToolStripMenuItem_Click(System::Object^  sender
 			 String ^err=p1->StandardError->ReadToEnd();
 			 //this->tbOutput->Text="";
 			 this->tbOutput->Text+=str1;
-			 this->tbOutput->Text+=err;
+
+			 tbOutput->SelectionColor = System::Drawing::Color::Red;
+			 tbOutput->SelectionFont = gcnew System::Drawing::Font("Courier New", 10, System::Drawing::FontStyle::Regular);
+			 this->tbOutput->SelectedText=err;
 
 			 //end startuvanje na parser
 
