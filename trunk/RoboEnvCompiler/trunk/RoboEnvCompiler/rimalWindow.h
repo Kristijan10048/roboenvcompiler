@@ -11,7 +11,7 @@ using namespace System::Drawing;
 namespace RoboEnvCompiler {
 
 	/// <summary>
-	/// Summary for tokensBox
+	/// Summary for rimalWindow
 	///
 	/// WARNING: If you change the name of this class, you will need to change the
 	///          'Resource File Name' property for the managed resource compiler tool
@@ -19,10 +19,10 @@ namespace RoboEnvCompiler {
 	///          the designers will not be able to interact properly with localized
 	///          resources associated with this form.
 	/// </summary>
-	public ref class tokensBox : public System::Windows::Forms::Form
+	public ref class rimalWindow : public System::Windows::Forms::Form
 	{
 	public:
-		tokensBox(void)
+		rimalWindow(void)
 		{
 			InitializeComponent();
 			//
@@ -34,20 +34,19 @@ namespace RoboEnvCompiler {
 		/// <summary>
 		/// Clean up any resources being used.
 		/// </summary>
-		~tokensBox()
+		~rimalWindow()
 		{
 			if (components)
 			{
 				delete components;
 			}
 		}
-
+	private: System::Windows::Forms::TableLayoutPanel^  tableLayoutPanel1;
 	protected: 
 	private: System::Windows::Forms::Button^  button1;
 	private: System::Windows::Forms::GroupBox^  groupBox1;
 	public: System::Windows::Forms::RichTextBox^  richTextBox1;
-	private: System::Windows::Forms::TableLayoutPanel^  tableLayoutPanel1;
-
+	private: 
 
 	private:
 		/// <summary>
@@ -62,25 +61,43 @@ namespace RoboEnvCompiler {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(tokensBox::typeid));
+			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(rimalWindow::typeid));
+			this->tableLayoutPanel1 = (gcnew System::Windows::Forms::TableLayoutPanel());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
 			this->richTextBox1 = (gcnew System::Windows::Forms::RichTextBox());
-			this->tableLayoutPanel1 = (gcnew System::Windows::Forms::TableLayoutPanel());
-			this->groupBox1->SuspendLayout();
 			this->tableLayoutPanel1->SuspendLayout();
+			this->groupBox1->SuspendLayout();
 			this->SuspendLayout();
+			// 
+			// tableLayoutPanel1
+			// 
+			this->tableLayoutPanel1->ColumnCount = 3;
+			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 
+				45)));
+			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 
+				6.04333F)));
+			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 
+				49.03079F)));
+			this->tableLayoutPanel1->Controls->Add(this->button1, 1, 0);
+			this->tableLayoutPanel1->Dock = System::Windows::Forms::DockStyle::Bottom;
+			this->tableLayoutPanel1->Location = System::Drawing::Point(0, 530);
+			this->tableLayoutPanel1->Name = L"tableLayoutPanel1";
+			this->tableLayoutPanel1->RowCount = 1;
+			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 100)));
+			this->tableLayoutPanel1->Size = System::Drawing::Size(877, 31);
+			this->tableLayoutPanel1->TabIndex = 4;
 			// 
 			// button1
 			// 
 			this->button1->AutoSize = true;
 			this->button1->Location = System::Drawing::Point(397, 3);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(59, 23);
+			this->button1->Size = System::Drawing::Size(46, 23);
 			this->button1->TabIndex = 1;
 			this->button1->Text = L"OK";
 			this->button1->UseVisualStyleBackColor = true;
-			this->button1->Click += gcnew System::EventHandler(this, &tokensBox::button1_Click);
+			this->button1->Click += gcnew System::EventHandler(this, &rimalWindow::button1_Click);
 			// 
 			// groupBox1
 			// 
@@ -90,63 +107,38 @@ namespace RoboEnvCompiler {
 			this->groupBox1->Controls->Add(this->richTextBox1);
 			this->groupBox1->Location = System::Drawing::Point(12, 12);
 			this->groupBox1->Name = L"groupBox1";
-			this->groupBox1->Size = System::Drawing::Size(853, 528);
-			this->groupBox1->TabIndex = 2;
+			this->groupBox1->Size = System::Drawing::Size(853, 512);
+			this->groupBox1->TabIndex = 6;
 			this->groupBox1->TabStop = false;
-			this->groupBox1->Enter += gcnew System::EventHandler(this, &tokensBox::groupBox1_Enter);
 			// 
 			// richTextBox1
 			// 
 			this->richTextBox1->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->richTextBox1->Location = System::Drawing::Point(3, 16);
 			this->richTextBox1->Name = L"richTextBox1";
-			this->richTextBox1->Size = System::Drawing::Size(847, 509);
+			this->richTextBox1->Size = System::Drawing::Size(847, 493);
 			this->richTextBox1->TabIndex = 0;
 			this->richTextBox1->Text = L"";
 			// 
-			// tableLayoutPanel1
-			// 
-			this->tableLayoutPanel1->ColumnCount = 3;
-			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 
-				45)));
-			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 
-				7.525656F)));
-			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent, 
-				47.54846F)));
-			this->tableLayoutPanel1->Controls->Add(this->button1, 1, 0);
-			this->tableLayoutPanel1->Dock = System::Windows::Forms::DockStyle::Bottom;
-			this->tableLayoutPanel1->Location = System::Drawing::Point(0, 546);
-			this->tableLayoutPanel1->Name = L"tableLayoutPanel1";
-			this->tableLayoutPanel1->RowCount = 1;
-			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 100)));
-			this->tableLayoutPanel1->Size = System::Drawing::Size(877, 31);
-			this->tableLayoutPanel1->TabIndex = 3;
-			// 
-			// tokensBox
+			// rimalWindow
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(877, 577);
-			this->Controls->Add(this->tableLayoutPanel1);
+			this->ClientSize = System::Drawing::Size(877, 561);
 			this->Controls->Add(this->groupBox1);
+			this->Controls->Add(this->tableLayoutPanel1);
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^  >(resources->GetObject(L"$this.Icon")));
-			this->Name = L"tokensBox";
-			this->Text = L"Tokens";
-			this->groupBox1->ResumeLayout(false);
+			this->Name = L"rimalWindow";
+			this->Text = L"rimalWindow";
 			this->tableLayoutPanel1->ResumeLayout(false);
 			this->tableLayoutPanel1->PerformLayout();
+			this->groupBox1->ResumeLayout(false);
 			this->ResumeLayout(false);
 
 		}
 #pragma endregion
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
-				 this->Hide();
-			 }
-	public: void setText(String ^txt)
-			{
-				this->richTextBox1->Text=txt;
-			}
-	private: System::Void groupBox1_Enter(System::Object^  sender, System::EventArgs^  e) {
+				 this->Close();
 			 }
 };
 }

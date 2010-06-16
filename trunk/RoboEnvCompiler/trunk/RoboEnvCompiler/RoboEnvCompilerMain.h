@@ -3,6 +3,8 @@
 #include "aboutForm.h"
 #include "errorList.h"
 #include "tokensBox.h"
+#include "rimalCode.h"
+#include "rimalWindow.h"
 
 namespace RoboEnvCompiler {
 
@@ -40,9 +42,10 @@ namespace RoboEnvCompiler {
 			//razlika za tbInpt
 		    this->razw=this->lastw-this->tbInput->Width;
 			this->razh=this->lasth-this->tbInput->Height;
-
+			
 			//this->razOutw=this->tbInput->Location.X
 			this->fileChanged=false;
+			this->codeErrors=false;
 		}
 
 	protected:
@@ -69,14 +72,16 @@ namespace RoboEnvCompiler {
 
 	private: System::Windows::Forms::ToolStripMenuItem^  toolStripMenuItem1;
 	private: System::Windows::Forms::ToolStripMenuItem^  compileToolStripMenuItem;
-	private: System::Windows::Forms::ToolStripMenuItem^  stepOverToolStripMenuItem;
+
 
 	private: int lastw;
 	private: int lasth;
 	private: int razw;
 	private: int razh;
 
-	private: errorList ^f; 
+	private: tokensBox ^tbox;
+	private: errorList ^f;
+	private: bool codeErrors;
 
 	private: int razOutw;
 	private: int razouth;
@@ -115,9 +120,13 @@ namespace RoboEnvCompiler {
 	private: System::Windows::Forms::ToolStripSeparator^  toolStripSeparator2;
 	private: System::Windows::Forms::ToolStripButton^  toolStripButton8;
 	private: System::Windows::Forms::ToolStripButton^  toolStripButton9;
-	private: System::Windows::Forms::ToolStripMenuItem^  checkSyntaxToolStripMenuItem;
+
 	private: System::Windows::Forms::RichTextBox^  tbOutput;
 	private: System::Windows::Forms::FolderBrowserDialog^  folderBrowserDialog1;
+	private: System::Windows::Forms::ToolStripMenuItem^  tokenizeToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripButton^  toolStripButton10;
+	private: System::Windows::Forms::ToolStripMenuItem^  rimalCodeToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripButton^  toolStripButton11;
 
 
 
@@ -169,8 +178,8 @@ namespace RoboEnvCompiler {
 			this->toolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->compileToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->showErrorListToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->stepOverToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->checkSyntaxToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->tokenizeToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->rimalCodeToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->helpToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->aboutToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
@@ -191,6 +200,8 @@ namespace RoboEnvCompiler {
 			this->toolStripSeparator2 = (gcnew System::Windows::Forms::ToolStripSeparator());
 			this->toolStripButton8 = (gcnew System::Windows::Forms::ToolStripButton());
 			this->toolStripButton9 = (gcnew System::Windows::Forms::ToolStripButton());
+			this->toolStripButton10 = (gcnew System::Windows::Forms::ToolStripButton());
+			this->toolStripButton11 = (gcnew System::Windows::Forms::ToolStripButton());
 			this->folderBrowserDialog1 = (gcnew System::Windows::Forms::FolderBrowserDialog());
 			this->statusStrip1->SuspendLayout();
 			this->menuStrip1->SuspendLayout();
@@ -329,7 +340,7 @@ namespace RoboEnvCompiler {
 			// toolStripMenuItem1
 			// 
 			this->toolStripMenuItem1->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {this->compileToolStripMenuItem, 
-				this->showErrorListToolStripMenuItem, this->stepOverToolStripMenuItem, this->checkSyntaxToolStripMenuItem});
+				this->showErrorListToolStripMenuItem, this->tokenizeToolStripMenuItem, this->rimalCodeToolStripMenuItem});
 			this->toolStripMenuItem1->Name = L"toolStripMenuItem1";
 			this->toolStripMenuItem1->Size = System::Drawing::Size(41, 20);
 			this->toolStripMenuItem1->Text = L"Build";
@@ -350,19 +361,21 @@ namespace RoboEnvCompiler {
 			this->showErrorListToolStripMenuItem->Text = L"Show error list";
 			this->showErrorListToolStripMenuItem->Click += gcnew System::EventHandler(this, &RoboEnvCompilerMain::showErrorListToolStripMenuItem_Click);
 			// 
-			// stepOverToolStripMenuItem
+			// tokenizeToolStripMenuItem
 			// 
-			this->stepOverToolStripMenuItem->Name = L"stepOverToolStripMenuItem";
-			this->stepOverToolStripMenuItem->Size = System::Drawing::Size(154, 22);
-			this->stepOverToolStripMenuItem->Text = L"Step Over";
-			this->stepOverToolStripMenuItem->Click += gcnew System::EventHandler(this, &RoboEnvCompilerMain::stepOverToolStripMenuItem_Click);
+			this->tokenizeToolStripMenuItem->Image = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"tokenizeToolStripMenuItem.Image")));
+			this->tokenizeToolStripMenuItem->Name = L"tokenizeToolStripMenuItem";
+			this->tokenizeToolStripMenuItem->Size = System::Drawing::Size(154, 22);
+			this->tokenizeToolStripMenuItem->Text = L"Tokenize";
+			this->tokenizeToolStripMenuItem->Click += gcnew System::EventHandler(this, &RoboEnvCompilerMain::tokenizeToolStripMenuItem_Click);
 			// 
-			// checkSyntaxToolStripMenuItem
+			// rimalCodeToolStripMenuItem
 			// 
-			this->checkSyntaxToolStripMenuItem->Name = L"checkSyntaxToolStripMenuItem";
-			this->checkSyntaxToolStripMenuItem->Size = System::Drawing::Size(154, 22);
-			this->checkSyntaxToolStripMenuItem->Text = L"Syntax check";
-			this->checkSyntaxToolStripMenuItem->Click += gcnew System::EventHandler(this, &RoboEnvCompilerMain::checkSintaxToolStripMenuItem_Click);
+			this->rimalCodeToolStripMenuItem->Image = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"rimalCodeToolStripMenuItem.Image")));
+			this->rimalCodeToolStripMenuItem->Name = L"rimalCodeToolStripMenuItem";
+			this->rimalCodeToolStripMenuItem->Size = System::Drawing::Size(154, 22);
+			this->rimalCodeToolStripMenuItem->Text = L"Rimal Code";
+			this->rimalCodeToolStripMenuItem->Click += gcnew System::EventHandler(this, &RoboEnvCompilerMain::rimalCodeToolStripMenuItem_Click);
 			// 
 			// helpToolStripMenuItem
 			// 
@@ -440,9 +453,9 @@ namespace RoboEnvCompiler {
 			// 
 			// toolStrip1
 			// 
-			this->toolStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(11) {this->toolStripButton1, 
+			this->toolStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(13) {this->toolStripButton1, 
 				this->toolStripButton2, this->toolStripButton3, this->toolStripSeparator1, this->toolStripButton4, this->toolStripButton5, this->toolStripButton6, 
-				this->toolStripButton7, this->toolStripSeparator2, this->toolStripButton8, this->toolStripButton9});
+				this->toolStripButton7, this->toolStripSeparator2, this->toolStripButton8, this->toolStripButton9, this->toolStripButton10, this->toolStripButton11});
 			this->toolStrip1->Location = System::Drawing::Point(0, 24);
 			this->toolStrip1->Name = L"toolStrip1";
 			this->toolStrip1->Size = System::Drawing::Size(794, 25);
@@ -557,6 +570,28 @@ namespace RoboEnvCompiler {
 			this->toolStripButton9->ToolTipText = L"Show error list";
 			this->toolStripButton9->Click += gcnew System::EventHandler(this, &RoboEnvCompilerMain::showErrorListToolStripMenuItem_Click);
 			// 
+			// toolStripButton10
+			// 
+			this->toolStripButton10->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Image;
+			this->toolStripButton10->Image = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"toolStripButton10.Image")));
+			this->toolStripButton10->ImageTransparentColor = System::Drawing::Color::Magenta;
+			this->toolStripButton10->Name = L"toolStripButton10";
+			this->toolStripButton10->Size = System::Drawing::Size(23, 22);
+			this->toolStripButton10->Text = L"toolStripButton10";
+			this->toolStripButton10->ToolTipText = L"Show tokens";
+			this->toolStripButton10->Click += gcnew System::EventHandler(this, &RoboEnvCompilerMain::tokenizeToolStripMenuItem_Click);
+			// 
+			// toolStripButton11
+			// 
+			this->toolStripButton11->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Image;
+			this->toolStripButton11->Image = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"toolStripButton11.Image")));
+			this->toolStripButton11->ImageTransparentColor = System::Drawing::Color::Magenta;
+			this->toolStripButton11->Name = L"toolStripButton11";
+			this->toolStripButton11->Size = System::Drawing::Size(23, 22);
+			this->toolStripButton11->Text = L"toolStripButton11";
+			this->toolStripButton11->ToolTipText = L"Generate Rimal ";
+			this->toolStripButton11->Click += gcnew System::EventHandler(this, &RoboEnvCompilerMain::rimalCodeToolStripMenuItem_Click);
+			// 
 			// RoboEnvCompilerMain
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -661,9 +696,9 @@ private: System::Void selectAllToolStripMenuItem_Click(System::Object^  sender, 
 		 }
 private: System::Void tbInput_TextChanged(System::Object^  sender, System::EventArgs^  e) {
 
-			 if(this->fileChanged)
+			// if(this->fileChanged)
 				this->Text="RoboEnvCompiler-"+textFilePath+"*";
-			 this->fileChanged=true;
+			 //this->fileChanged=true;
 		 }
 private: System::Void saveCtrlSToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 
@@ -705,6 +740,8 @@ private: void saveFile(String ^path)
 		 }
 private: System::Void compileToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 			
+			 //avotmatsko zacuvuvanje na fajlot sto treba da se 
+			 //kompjalira, ako nema pateka do fajtlot togas se otvara fileDialog
 			 if(!String::IsNullOrEmpty(this->textFilePath))
 				 this->saveFile(this->textFilePath);
 			 else{
@@ -713,48 +750,18 @@ private: System::Void compileToolStripMenuItem_Click(System::Object^  sender, Sy
 				this->saveFile(this->textFilePath);
 			 }
 
-			 //stasrtuvanje na lekserot///////////////////////////////////////////////
-			 if(!String::IsNullOrEmpty(this->textFilePath))
-			 {
-				this->Text="RoboEnvCompiler-"+textFilePath;
-				
-				System::Diagnostics::ProcessStartInfo ^si = gcnew System::Diagnostics::ProcessStartInfo();
-				si->UseShellExecute=false;
-				si->FileName=componentsPath+"demo000.exe";
-				si->Arguments="\""+this->textFilePath+"\"";			
-				si->CreateNoWindow=true;				
-				si->RedirectStandardOutput=true;
-
-				this->groupBox1->Text=si->Arguments->ToString();
-				System::Diagnostics::Process ^p= System::Diagnostics::Process::Start(si);
-				p->WaitForExit();
-				String ^str=p->StandardOutput->ReadToEnd();
-				this->tbOutput->Text="";
-				this->tbOutput->Text=str;
-			
-				f = gcnew errorList();
-				String ^line;
-				int len=this->tbOutput->Lines->Length;
-				for(int i=0;i<len;i++)
-				{
-					line=this->tbOutput->Lines[i];
-					this->markRedLine(line,f);	
-				}	
-				//autoscrol
-				this->tbOutput->SelectionStart=this->tbOutput->TextLength;
-				this->tbOutput->ScrollToCaret();	
-				f->Show();
+			 //stasrtuvanje na parserot///////////////////////////////////////////////
+			 if(!String::IsNullOrEmpty(this->textFilePath)) {
+				codeParser();
 			}
 		 }
 private: void markRedLine(String ^str, errorList ^fp){
-
 			 array<String^>^ spl=str->Split(':');
 			 if(spl->Length==3)
-			 if(spl[2]=="NEPOZNAT")
-			 {
+			 if(spl[2]=="NEPOZNAT"){
 				 fp->addRow(spl[0],spl[1],spl[2]);
+				 codeErrors=true;
 			 }
-
 		}
 
 private: void markLine(int pos)
@@ -763,13 +770,12 @@ private: void markLine(int pos)
 			 int i;
 			 for(i=0;i<pos;i++)
 				 offset+=this->tbInput->Lines[i]->Length;
-
 			int inpline=this->tbInput->Lines[pos]->Length;
-
 			this->tbInput->Select(offset+1, inpline );
 			this->tbInput->SelectionColor=Color::Red;
 			this->tbInput->Select(0,0);
 		 }
+
 private: System::Void newToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 			 this->tbInput->Text="";
 			 this->textFilePath="";
@@ -778,23 +784,23 @@ private: System::Void newToolStripMenuItem_Click(System::Object^  sender, System
 			 this->tbOutput->Text="";
 		 }
 
-private: System::Void stepOverToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+private: System::Void stepOverToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {			  
 			  
-			  
-			//  this->tbInput->SelectedText=this->tbInput->Lines[0]->ToString();
-			// this->tbInput->Select(0,4);
-		//	 this->markLine(5);
-			 //this->tbInput->selection
-			// this->tbInput->SelectionBackColor=Color::Magenta;
-			//  this->tbInput->SelectionColor=Color::White;
-			//  this->tbInput->Select(0,0);
-			//	MessageBox ^mb = gcnew MessageBox(;
-			// mb->Show("test");
-			
+			//this->tbInput->SelectedText=this->tbInput->Lines[0]->ToString();
+			//this->tbInput->Select(0,4);
+			//this->markLine(5);
+			//this->tbInput->selection
+			//this->tbInput->SelectionBackColor=Color::Magenta;
+			//this->tbInput->SelectionColor=Color::White;
+			//this->tbInput->Select(0,0);
+			//MessageBox ^mb = gcnew MessageBox(;
+			//mb->Show("test");			
 		 }
+
 private: System::Void tbInput_CursorChanged(System::Object^  sender, System::EventArgs^  e) {
 			 
 		 }
+
 private: System::Void tbInput_SelectionChanged(System::Object^  sender, System::EventArgs^  e) {
 			 int sstart=this->tbInput->SelectionStart;//
 			 int col=sstart-this->tbInput->GetFirstCharIndexOfCurrentLine()+1;
@@ -821,9 +827,9 @@ private: System::Void showErrorListToolStripMenuItem_Click(System::Object^  send
 			 if(this->f != nullptr ) this->f->Show();
 			 //System::Windows::Forms::MessageBox::Show("test");
 		 }
+private: void codeParser(){
 
-private: System::Void checkSintaxToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
-			 if(!File::Exists(componentsPath+"conv.exe")){
+ if(!File::Exists(componentsPath+"conv.exe")){
 				 this->folderBrowserDialog1->ShowDialog();
 				 this->componentsPath=this->folderBrowserDialog1->SelectedPath;
 			 }
@@ -842,7 +848,7 @@ private: System::Void checkSintaxToolStripMenuItem_Click(System::Object^  sender
 			 System::Diagnostics::Process ^p= System::Diagnostics::Process::Start(convertor);
 			 p->WaitForExit();
 			 String ^str=p->StandardOutput->ReadToEnd();
-			 this->tbOutput->Text="";
+			// this->tbOutput->Text="";
 			 //this->tbOutput->Text=str;
 			 //end startuvanje na konvertor
 
@@ -877,26 +883,28 @@ private: System::Void checkSintaxToolStripMenuItem_Click(System::Object^  sender
 			  while(!p1->StandardError->EndOfStream)
 			  {
 				    tbOutput->SelectionColor = System::Drawing::Color::Red;
-				    tbOutput->SelectionFont = gcnew System::Drawing::Font("Courier New", 10, System::Drawing::FontStyle::Regular);
+				    tbOutput->SelectionFont = gcnew System::Drawing::Font("Courier New", 10, System::Drawing::FontStyle::Regular);			
 					err=p1->StandardError->ReadLine();
-					this->tbOutput->SelectedText+=this->parseErrorOut(err+"\r\n");
+					this->tbOutput->SelectedText+=this->parseErrorOut(err+"\r\n");			
 
 			  }
-			 //this->tbOutput->Text="";
-			 
-			 
-			 
 			 //end startuvanje na parser
+			
+			//////////////////////////////////////////////////////////////////////////////////////
 
 			 //autoscrol
 				this->tbOutput->SelectionStart=this->tbOutput->TextLength;
 				this->tbOutput->ScrollToCaret();	
+			
+		 }
+
+
+private: System::Void checkSintaxToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 				
 		 }
 
 
-		String^ parseErrorOut(String ^line)
-		{
+		String^ parseErrorOut(String ^line) {
 			array<String^>^ errtokens = line->Split(' ');
 			int i;String ^res="";
 	
@@ -919,7 +927,7 @@ private: System::Void checkSintaxToolStripMenuItem_Click(System::Object^  sender
 
 
 		//kod za boenje na sintaksa
-		 	void ParseColor() {
+private: void ParseColor() {
             // Foreach line in input,
             // identify key words and format them when adding to the rich text box.
 			System::Text::RegularExpressions::Regex^ r = gcnew System::Text::RegularExpressions::Regex("\\n");
@@ -931,7 +939,7 @@ private: System::Void checkSintaxToolStripMenuItem_Click(System::Object^  sender
 			
         }
 
-        void ParseLine(String^ line)
+private: void ParseLine(String^ line)
         {
             System::Text::RegularExpressions::Regex^ r = gcnew System::Text::RegularExpressions::Regex("([ \\t{}();])");
             array<String^>^ tokens = r->Split(line);
@@ -972,6 +980,62 @@ private: System::Void checkSintaxToolStripMenuItem_Click(System::Object^  sender
 	    //end of kod za boenje sintaksa
 
 
+private: System::Void tokenizeToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+			 //avotmatsko zacuvuvanje na fajlot sto treba da se 
+			 //kompjalira, ako nema pateka do fajtlot togas se otvara fileDialog
+			 if(!String::IsNullOrEmpty(this->textFilePath))
+				 this->saveFile(this->textFilePath);
+			 else{
+				this->saveFileDialog1->ShowDialog();
+				this->textFilePath=this->saveFileDialog1->FileName;
+				this->saveFile(this->textFilePath);
+			 }
+			 //stasrtuvanje na lekserot///////////////////////////////////////////////
+			 if(!String::IsNullOrEmpty(this->textFilePath))
+			 {
+				this->Text="RoboEnvCompiler-"+textFilePath;
+				
+				System::Diagnostics::ProcessStartInfo ^si = gcnew System::Diagnostics::ProcessStartInfo();
+				si->UseShellExecute=false;
+				si->FileName=componentsPath+"demo000.exe";
+				si->Arguments="\""+this->textFilePath+"\"";			
+				si->CreateNoWindow=true;				
+				si->RedirectStandardOutput=true;
+
+				this->groupBox1->Text=si->Arguments->ToString();
+				System::Diagnostics::Process ^p= System::Diagnostics::Process::Start(si);
+				p->WaitForExit();
+				String ^str=p->StandardOutput->ReadToEnd();
+				this->tbOutput->Text="";
+				this->tbox= gcnew tokensBox();
+				this->tbox->setText(str);
+				//this->tbOutput->Text=str;
+			
+				//parsiranje na izlezot od lekserot i predavanje na greskite
+				//vo errorList prozorot
+				f = gcnew errorList();
+				String ^line;
+				int len=this->tbox->richTextBox1->Lines->Length;
+				for(int i=0;i<len;i++)
+				{
+					line=this->tbox->richTextBox1->Lines[i];
+					this->markRedLine(line,f);	
+				}	
+				//autoscrol
+				this->tbOutput->SelectionStart=this->tbOutput->TextLength;
+				this->tbOutput->ScrollToCaret();
+				if(this->codeErrors)
+					f->Show();
+				tbox->Show();
+			}
+		 }
+private: System::Void rimalCodeToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+			 //generiranje na rimal...
+			 rimalCode^ rim = gcnew rimalCode();			 
+			 rimalWindow ^rimalWin = gcnew rimalWindow();
+			 rimalWin->richTextBox1->Text = rim->roboToRim(this->tbInput->Text);
+			 rimalWin->Show();
+		 }
 };
 }
 

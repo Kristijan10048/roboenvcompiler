@@ -216,6 +216,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\rimalCode.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\rimalWindow.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\RoboEnvCompiler.cpp"
 				>
 			</File>
@@ -284,6 +292,20 @@
 			<File
 				RelativePath=".\rimalCG.h"
 				>
+			</File>
+			<File
+				RelativePath=".\rimalCode.h"
+				>
+			</File>
+			<File
+				RelativePath=".\rimalWindow.h"
+				FileType="3"
+				>
+				<File
+					RelativePath=".\rimalWindow.resx"
+					SubType="Designer"
+					>
+				</File>
 			</File>
 			<File
 				RelativePath=".\RoboEnvCompilerMain.h"
