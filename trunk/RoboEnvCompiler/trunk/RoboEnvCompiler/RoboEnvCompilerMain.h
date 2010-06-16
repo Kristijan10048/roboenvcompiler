@@ -127,6 +127,7 @@ namespace RoboEnvCompiler {
 	private: System::Windows::Forms::ToolStripButton^  toolStripButton10;
 	private: System::Windows::Forms::ToolStripMenuItem^  rimalCodeToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripButton^  toolStripButton11;
+	private: System::Windows::Forms::PictureBox^  pictureBox2;
 
 
 
@@ -185,6 +186,7 @@ namespace RoboEnvCompiler {
 			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
 			this->saveFileDialog1 = (gcnew System::Windows::Forms::SaveFileDialog());
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
+			this->pictureBox2 = (gcnew System::Windows::Forms::PictureBox());
 			this->tbOutput = (gcnew System::Windows::Forms::RichTextBox());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
 			this->tbInput = (gcnew System::Windows::Forms::RichTextBox());
@@ -206,6 +208,7 @@ namespace RoboEnvCompiler {
 			this->statusStrip1->SuspendLayout();
 			this->menuStrip1->SuspendLayout();
 			this->groupBox1->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->pictureBox2))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->pictureBox1))->BeginInit();
 			this->toolStrip1->SuspendLayout();
 			this->SuspendLayout();
@@ -406,6 +409,7 @@ namespace RoboEnvCompiler {
 			// 
 			// groupBox1
 			// 
+			this->groupBox1->Controls->Add(this->pictureBox2);
 			this->groupBox1->Controls->Add(this->tbOutput);
 			this->groupBox1->Controls->Add(this->pictureBox1);
 			this->groupBox1->Dock = System::Windows::Forms::DockStyle::Bottom;
@@ -416,11 +420,23 @@ namespace RoboEnvCompiler {
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"groupBox1";
 			// 
+			// pictureBox2
+			// 
+			this->pictureBox2->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->pictureBox2->Image = (cli::safe_cast<System::Drawing::Image^  >(resources->GetObject(L"pictureBox2.Image")));
+			this->pictureBox2->Location = System::Drawing::Point(25, 16);
+			this->pictureBox2->Name = L"pictureBox2";
+			this->pictureBox2->Size = System::Drawing::Size(17, 16);
+			this->pictureBox2->TabIndex = 10;
+			this->pictureBox2->TabStop = false;
+			this->pictureBox2->Click += gcnew System::EventHandler(this, &RoboEnvCompilerMain::pictureBox2_Click);
+			// 
 			// tbOutput
 			// 
 			this->tbOutput->Dock = System::Windows::Forms::DockStyle::Bottom;
 			this->tbOutput->Location = System::Drawing::Point(3, 34);
 			this->tbOutput->Name = L"tbOutput";
+			this->tbOutput->ReadOnly = true;
 			this->tbOutput->Size = System::Drawing::Size(788, 188);
 			this->tbOutput->TabIndex = 9;
 			this->tbOutput->Text = L"";
@@ -615,6 +631,7 @@ namespace RoboEnvCompiler {
 			this->menuStrip1->PerformLayout();
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->pictureBox2))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->pictureBox1))->EndInit();
 			this->toolStrip1->ResumeLayout(false);
 			this->toolStrip1->PerformLayout();
@@ -858,10 +875,9 @@ private: void codeParser(){
 			 // ako ekstenzijata na fajlot e .env togas programta se parsira so 
 			//parserEnv.exe ako e .rob togas se parsira so parserProg.exe
 			 String ^ext = this->textFilePath->Substring(this->textFilePath->Length-4);
-			 this->tbOutput->Text+="extension:"+ext+"\r\n";
-
 
 			 //startuvanje na parser
+			 this->tbOutput->Text="";
 			 System::Diagnostics::ProcessStartInfo ^parser = gcnew System::Diagnostics::ProcessStartInfo();
 			 parser->UseShellExecute=false;
 			 if(ext==".env")
@@ -1035,6 +1051,9 @@ private: System::Void rimalCodeToolStripMenuItem_Click(System::Object^  sender, 
 			 rimalWindow ^rimalWin = gcnew rimalWindow();
 			 rimalWin->richTextBox1->Text = rim->roboToRim(this->tbInput->Text);
 			 rimalWin->Show();
+		 }
+private: System::Void pictureBox2_Click(System::Object^  sender, System::EventArgs^  e) {
+			 Clipboard::SetDataObject(this->tbOutput->Text,true);
 		 }
 };
 }
