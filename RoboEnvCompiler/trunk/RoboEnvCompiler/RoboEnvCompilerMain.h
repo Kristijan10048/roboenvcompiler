@@ -88,7 +88,8 @@ namespace RoboEnvCompiler {
 	private: bool saved;
 	private: bool fileChanged;
 	private: String ^textFilePath;
-	private: static String ^componentsPath="C:\\Documents and Settings\\Kristijan\\My Documents\\Visual Studio 2008\\Projects\\kompajleri\\robocompiler\\RoboEnvCompiler\\RoboEnvCompiler\\";
+	private: static String ^componentsPath=".\\";
+				 //"C:\\Documents and Settings\\Kristijan\\My Documents\\Visual Studio 2008\\Projects\\kompajleri\\robocompiler\\RoboEnvCompiler\\RoboEnvCompiler\\";
 	private: System::Windows::Forms::ToolStripMenuItem^  openCtrlOToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  saveCtrlSToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  saveAsToolStripMenuItem;
@@ -846,11 +847,15 @@ private: System::Void showErrorListToolStripMenuItem_Click(System::Object^  send
 		 }
 private: void codeParser(){
 
- if(!File::Exists(componentsPath+"conv.exe")){
+			if(!File::Exists(componentsPath+"\\conv.exe")){
 				 this->folderBrowserDialog1->ShowDialog();
 				 this->componentsPath=this->folderBrowserDialog1->SelectedPath;
 			 }
-
+			
+			if(
+				(File::Exists(componentsPath+"\\conv.exe")) && 
+				(File::Exists(componentsPath+"\\parserEnv.exe")) && 
+				(File::Exists(componentsPath+"\\parserProg.exe"))) {
 			 //boenje na kod				
 			 this->ParseColor();			
 			 //startuvanje na konvertor
@@ -911,6 +916,11 @@ private: void codeParser(){
 			 //autoscrol
 				this->tbOutput->SelectionStart=this->tbOutput->TextLength;
 				this->tbOutput->ScrollToCaret();	
+			}
+			else
+			{
+				 MessageBox::Show("Parsers not found!","Error",MessageBoxButtons::OK,MessageBoxIcon::Error);
+			}
 			
 		 }
 
@@ -1006,14 +1016,20 @@ private: System::Void tokenizeToolStripMenuItem_Click(System::Object^  sender, S
 				this->textFilePath=this->saveFileDialog1->FileName;
 				this->saveFile(this->textFilePath);
 			 }
+
+			 if(!File::Exists(componentsPath+"\\conv.exe")){
+				 this->folderBrowserDialog1->ShowDialog();
+				 this->componentsPath=this->folderBrowserDialog1->SelectedPath;
+			 }
+
 			 //stasrtuvanje na lekserot///////////////////////////////////////////////
-			 if(!String::IsNullOrEmpty(this->textFilePath))
+			 if((!String::IsNullOrEmpty(this->textFilePath)) && (File::Exists(componentsPath+"\\demo000.exe")))
 			 {
 				this->Text="RoboEnvCompiler-"+textFilePath;
 				
 				System::Diagnostics::ProcessStartInfo ^si = gcnew System::Diagnostics::ProcessStartInfo();
 				si->UseShellExecute=false;
-				si->FileName=componentsPath+"demo000.exe";
+				si->FileName=componentsPath+"\\demo000.exe";
 				si->Arguments="\""+this->textFilePath+"\"";			
 				si->CreateNoWindow=true;				
 				si->RedirectStandardOutput=true;
@@ -1044,6 +1060,8 @@ private: System::Void tokenizeToolStripMenuItem_Click(System::Object^  sender, S
 					f->Show();
 				tbox->Show();
 			}
+			 else
+			 MessageBox::Show("Lexer not found!","Error",MessageBoxButtons::OK,MessageBoxIcon::Error);
 		 }
 private: System::Void rimalCodeToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 			 //generiranje na rimal...
